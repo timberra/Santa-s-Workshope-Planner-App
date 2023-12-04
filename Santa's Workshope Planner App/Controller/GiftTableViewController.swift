@@ -29,7 +29,7 @@ class GiftTableViewController: UITableViewController {
     @IBAction func addNewPersonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add new person for gift?", preferredStyle: .alert)
         alertController.addTextField { textFieldValue in
-            textFieldValue.placeholder = "Your gift here.."
+            textFieldValue.placeholder = "Your person here.."
             
         }
         alertController.addTextField { subtextFieldValue in

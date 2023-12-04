@@ -10,22 +10,19 @@ import CoreData
 
 class GiftDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var selectedItem: SantaGift?
-    var santasGifts = [SantaGift]()
     var managedObjectContext: NSManagedObjectContext?
-    
+    var santasAddGifts = [SantaAddGift]()
     
     @IBOutlet weak var giftPersonNameLabel: UILabel!
     @IBOutlet weak var totalBudgetLabel: UILabel!
     @IBOutlet weak var giftListTable: UITableView!
     
     
-    
-//    @IBOutlet weak var giftNameLabel: UILabel!
-//    @IBOutlet weak var giftPriceLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.giftListTable.register(UINib(nibName: "GiftDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "giftPriceCell")
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+                       managedObjectContext = appDelegate.persistentContainer.viewContext
+
         print("ViewDidLoad is called.")
         self.giftListTable.dataSource = self
         self.giftListTable.delegate = self
@@ -55,7 +52,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
                       let textField = alertController.textFields?.first,
                       let subtitleTextField = alertController.textFields?.last,
                       let managedObjectContext = self.managedObjectContext,
-                      let entity = NSEntityDescription.entity(forEntityName: "SantaGift", in: managedObjectContext) else {
+                      let entity = NSEntityDescription.entity(forEntityName: "SantaAddGift", in: managedObjectContext) else {
                     return
                 }
 
@@ -67,7 +64,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
                 
 
                 self.saveCoreData()
-                self.santasGifts.append(list as! SantaGift)
+                self.santasAddGifts.append(list as! SantaAddGift)
             }
             let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
             alertController.addAction(addActionButton)
@@ -79,7 +76,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return santasGifts.count
+            return santasAddGifts.count
         }
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 44.0 // Adjust the height as needed
@@ -90,7 +87,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "giftPriceCell", for: indexPath) as! GiftDetailTableViewCell
         
-        let santaGift = santasGifts[indexPath.row]
+        let santaGift = santasAddGifts[indexPath.row]
         cell.giftNameLabel?.text = santaGift.gift ?? ""
         cell.giftPriceLabel?.text = "\(santaGift.giftPrice)"
         
@@ -106,11 +103,11 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
     // MARK: - CoreData logic
     
     func loadCoreData() {
-        let request: NSFetchRequest<SantaGift> = SantaGift.fetchRequest()
+        let request: NSFetchRequest<SantaAddGift> = SantaAddGift.fetchRequest()
         do {
             let result = try managedObjectContext?.fetch(request)
-            santasGifts = result ?? []
-            print("Number of gifts loaded: \(santasGifts.count)")
+            santasAddGifts = result ?? []
+            print("Number of gifts loaded: \(santasAddGifts.count)")
             self.giftListTable.reloadData()
         } catch {
             fatalError("Error in loading item into core data")
