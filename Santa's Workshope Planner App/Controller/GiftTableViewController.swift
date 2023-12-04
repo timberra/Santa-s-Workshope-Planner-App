@@ -12,11 +12,12 @@ class GiftTableViewController: UITableViewController {
     
     var managedObjectContext: NSManagedObjectContext?
     var santasGifts = [SantaGift]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let backButton = UIBarButtonItem()
-        backButton.title = "BACK" // Set your custom text here
+        backButton.title = "BACK" 
         backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "PlayfairDisplay-Bold", size: 13)!], for: .normal)
         self.navigationItem.backBarButtonItem = backButton
         tableView.allowsSelection = true

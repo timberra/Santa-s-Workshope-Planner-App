@@ -3,6 +3,7 @@
     <entity name="SantaAddGift" representedClassName="SantaAddGift" syncable="YES" codeGenerationType="class">
         <attribute name="gift" optional="YES" attributeType="String"/>
         <attribute name="giftPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="personID" optional="YES" attributeType="String"/>
     </entity>
     <entity name="SantaGift" representedClassName="SantaGift" syncable="YES" codeGenerationType="class">
         <attribute name="budget" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
