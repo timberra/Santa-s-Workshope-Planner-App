@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Santa’s Workshop Launcher" translatesAutoresizingMaskIntoConstraints="NO" id="Ydt-69-x74">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Santa’s Workshop Launch" translatesAutoresizingMaskIntoConstraints="NO" id="Ydt-69-x74">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
@@ -25,10 +25,14 @@
                         <constraints>
                             <constraint firstItem="Ydt-69-x74" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0bE-Zg-jOs"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Ydt-69-x74" secondAttribute="bottom" id="22A-lx-4vb"/>
+                            <constraint firstItem="Ydt-69-x74" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4nh-r5-b0E"/>
+                            <constraint firstItem="Ydt-69-x74" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="5rp-zT-Ysi"/>
                             <constraint firstItem="Ydt-69-x74" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HPL-QA-jeC"/>
+                            <constraint firstItem="Ydt-69-x74" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="O3b-63-RaY"/>
                             <constraint firstItem="Ydt-69-x74" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VdS-Ff-Jgj"/>
                             <constraint firstItem="Ydt-69-x74" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XgU-Yb-PU1"/>
                             <constraint firstItem="Ydt-69-x74" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cpN-B6-bV8"/>
+                            <constraint firstItem="Ydt-69-x74" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="eti-eh-uZo"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -38,7 +42,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Santa’s Workshop Launcher" width="640" height="1136"/>
+        <image name="Santa’s Workshop Launch" width="640" height="1136"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

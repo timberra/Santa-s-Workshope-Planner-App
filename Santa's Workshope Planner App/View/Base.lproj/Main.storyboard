@@ -13,6 +13,9 @@
         <array key="Quando-Regular.ttf">
             <string>Quando-Regular</string>
         </array>
+        <array key="lemon-tuesday.regular.otf">
+            <string>LemonTuesday</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Tab Bar Controller-->
@@ -24,7 +27,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" red="0.58823529411764708" green="0.074509803921568626" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="eed-LJ-SCK" kind="relationship" relationship="viewControllers" id="kgI-hJ-XeM"/>
@@ -45,6 +48,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="V7P-ZZ-aXH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="PlayfairDisplay-Bold" family="Playfair Display" pointSize="17"/>
+                            <color key="textColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="adx-UN-hWq" kind="relationship" relationship="rootViewController" id="XJL-nL-gs4"/>
@@ -71,7 +78,7 @@
             </objects>
             <point key="canvasLocation" x="1094" y="-107"/>
         </scene>
-        <!--Shop List-->
+        <!--Santa's link list-->
         <scene sceneID="E2J-0J-yQ6">
             <objects>
                 <tableViewController id="adx-UN-hWq" customClass="LinkTableViewController" customModule="Santa_s_Workshope_Planner_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,6 +86,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="separatorColor" red="0.58823529409999997" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="santaLinkCell" textLabel="6zf-Vy-z92" detailTextLabel="KFL-b5-vZ2" style="IBUITableViewCellStyleSubtitle" id="mTv-W1-nPc">
                                 <rect key="frame" x="0.0" y="50" width="375" height="46.5"/>
@@ -110,9 +118,9 @@
                             <outlet property="delegate" destination="adx-UN-hWq" id="2Mb-0d-1K7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Shop List" id="OT2-jV-MpH">
+                    <navigationItem key="navigationItem" title="Santa's link list" id="OT2-jV-MpH">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus.app" catalog="system" id="4kL-Jm-jvH">
-                            <color key="tintColor" red="0.58823529409999997" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="addNewItemTapped:" destination="adx-UN-hWq" id="mWH-VS-dKe"/>
                             </connections>
@@ -131,20 +139,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Santa’s Workshop Countdown" translatesAutoresizingMaskIntoConstraints="NO" id="o9z-ao-pzj">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Santa’s Workshop Countdown-2" translatesAutoresizingMaskIntoConstraints="NO" id="o9z-ao-pzj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxN-M8-fNr">
-                                <rect key="frame" x="16" y="388" width="343" height="93"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxN-M8-fNr">
+                                <rect key="frame" x="9" y="348" width="343" height="93"/>
+                                <fontDescription key="fontDescription" name="LemonTuesday" family="Lemon Tuesday" pointSize="33"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1CU-dS-LFp"/>
                         <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="o9z-ao-pzj" firstAttribute="top" secondItem="F88-2j-ICv" secondAttribute="top" id="29m-Tw-rQa"/>
+                            <constraint firstItem="o9z-ao-pzj" firstAttribute="leading" secondItem="1CU-dS-LFp" secondAttribute="leading" id="EMo-QZ-5Xv"/>
+                            <constraint firstItem="bxN-M8-fNr" firstAttribute="leading" secondItem="1CU-dS-LFp" secondAttribute="leading" constant="9" id="My5-AW-22p"/>
+                            <constraint firstItem="1CU-dS-LFp" firstAttribute="bottom" secondItem="bxN-M8-fNr" secondAttribute="bottom" constant="177" id="NxT-LS-xp5"/>
+                            <constraint firstAttribute="bottom" secondItem="o9z-ao-pzj" secondAttribute="bottom" id="Slz-iz-sFF"/>
+                            <constraint firstItem="bxN-M8-fNr" firstAttribute="top" secondItem="1CU-dS-LFp" secondAttribute="top" constant="284" id="ur8-HO-abE"/>
+                            <constraint firstItem="o9z-ao-pzj" firstAttribute="trailing" secondItem="1CU-dS-LFp" secondAttribute="trailing" id="xX8-j2-MPb"/>
+                            <constraint firstItem="1CU-dS-LFp" firstAttribute="trailing" secondItem="bxN-M8-fNr" secondAttribute="trailing" constant="23" id="yFN-iG-05b"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1xd-UW-AAp"/>
                     <connections>
@@ -163,6 +179,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qSe-RT-5KL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="PlayfairDisplay-Bold" family="Playfair Display" pointSize="17"/>
+                            <color key="textColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="eew-E2-3GC" kind="relationship" relationship="rootViewController" id="fQr-9Y-4ud"/>
@@ -172,7 +192,7 @@
             </objects>
             <point key="canvasLocation" x="-1492" y="-107"/>
         </scene>
-        <!--Gift Table View Controller-->
+        <!--Santa's nice list-->
         <scene sceneID="wuc-4k-L4g">
             <objects>
                 <tableViewController id="eew-E2-3GC" customClass="GiftTableViewController" customModule="Santa_s_Workshope_Planner_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -208,9 +228,9 @@
                             <outlet property="delegate" destination="eew-E2-3GC" id="gQ0-rB-mzm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="vaZ-YR-VZB">
+                    <navigationItem key="navigationItem" title="Santa's nice list" id="vaZ-YR-VZB">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus.app" catalog="system" id="6ws-W5-Igb">
-                            <color key="tintColor" red="0.58823529409999997" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="addNewPersonTapped:" destination="eew-E2-3GC" id="0h1-3I-fJX"/>
                             </connections>
@@ -229,10 +249,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bTg-CO-EXX">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bTg-CO-EXX">
                                 <rect key="frame" x="0.0" y="181" width="375" height="402"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="402" id="tLl-jF-Uyd"/>
+                                </constraints>
                                 <color key="separatorColor" red="0.58823529409999997" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="giftPriceCell" rowHeight="54" id="vGH-X9-Bvr" customClass="GiftDetailTableViewCell" customModule="Santa_s_Workshope_Planner_App" customModuleProvider="target">
@@ -272,36 +294,38 @@
                                     <outlet property="delegate" destination="mgs-iT-P23" id="44P-82-c2M"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6O-1i-qEH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6O-1i-qEH">
                                 <rect key="frame" x="119" y="64" width="136" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="hGr-nQ-esI"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdJ-z0-Mat">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdJ-z0-Mat">
                                 <rect key="frame" x="84" y="118" width="73" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="voc-WP-iBD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7A-b8-KJZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7A-b8-KJZ">
                                 <rect key="frame" x="16" y="607" width="343" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="A D D   A   G I F T">
                                     <fontDescription key="titleFontDescription" name="PlayfairDisplay-Bold" family="Playfair Display" pointSize="13"/>
-                                    <color key="baseForegroundColor" red="0.58823529409999997" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <color key="baseBackgroundColor" red="0.58823529409999997" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="baseForegroundColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="addGiftToList:" destination="mgs-iT-P23" eventType="touchUpInside" id="gul-dY-OgB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6m5-EQ-XSE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6m5-EQ-XSE">
                                 <rect key="frame" x="219" y="125" width="85" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -309,6 +333,24 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="J2k-ol-GdP"/>
                         <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="J2k-ol-GdP" firstAttribute="bottom" secondItem="Y7A-b8-KJZ" secondAttribute="bottom" constant="25" id="BPt-Hs-G2J"/>
+                            <constraint firstItem="bTg-CO-EXX" firstAttribute="centerX" secondItem="Y7A-b8-KJZ" secondAttribute="centerX" id="IEh-lL-X9w"/>
+                            <constraint firstItem="z6O-1i-qEH" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" constant="119" id="IaZ-1O-ith"/>
+                            <constraint firstItem="NdJ-z0-Mat" firstAttribute="top" secondItem="z6O-1i-qEH" secondAttribute="bottom" constant="1" id="LSe-YU-M5l"/>
+                            <constraint firstItem="J2k-ol-GdP" firstAttribute="trailing" secondItem="Y7A-b8-KJZ" secondAttribute="trailing" constant="16" id="U3j-n8-Cpc"/>
+                            <constraint firstItem="Y7A-b8-KJZ" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" constant="16" id="VPE-Gk-Hgc"/>
+                            <constraint firstItem="NdJ-z0-Mat" firstAttribute="centerY" secondItem="6m5-EQ-XSE" secondAttribute="centerY" id="XZr-AS-GV6"/>
+                            <constraint firstItem="z6O-1i-qEH" firstAttribute="top" secondItem="J2k-ol-GdP" secondAttribute="top" id="ZmC-lx-wad"/>
+                            <constraint firstItem="bTg-CO-EXX" firstAttribute="top" secondItem="NdJ-z0-Mat" secondAttribute="bottom" constant="29" id="Zry-mO-aib"/>
+                            <constraint firstItem="bTg-CO-EXX" firstAttribute="trailing" secondItem="J2k-ol-GdP" secondAttribute="trailing" id="eso-uK-MdA"/>
+                            <constraint firstItem="bTg-CO-EXX" firstAttribute="top" secondItem="a9f-7s-IMx" secondAttribute="top" constant="181" id="g3r-02-b86"/>
+                            <constraint firstItem="6m5-EQ-XSE" firstAttribute="leading" secondItem="NdJ-z0-Mat" secondAttribute="trailing" constant="62" id="jEf-gb-ayK"/>
+                            <constraint firstItem="bTg-CO-EXX" firstAttribute="centerX" secondItem="z6O-1i-qEH" secondAttribute="centerX" id="kse-rh-AUu"/>
+                            <constraint firstItem="NdJ-z0-Mat" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" constant="84" id="nsp-Hu-FME"/>
+                            <constraint firstItem="bTg-CO-EXX" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" id="rrL-B5-9fa"/>
+                            <constraint firstItem="Y7A-b8-KJZ" firstAttribute="top" secondItem="bTg-CO-EXX" secondAttribute="bottom" constant="24" id="t8X-WA-Dyn"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="s5o-5s-8XA"/>
                     <connections>
@@ -329,6 +371,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="duo-Qb-er9">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="PlayfairDisplay-Bold" family="Playfair Display" pointSize="17"/>
+                            <color key="textColor" red="0.43020164970000002" green="0.075462318959999997" blue="0.050949357450000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Cj6-hg-bnm" kind="relationship" relationship="rootViewController" id="HBZ-84-J4Y"/>
@@ -338,7 +384,7 @@
             </objects>
             <point key="canvasLocation" x="2433" y="-107"/>
         </scene>
-        <!--To Do Table View Controller-->
+        <!--Santa's to do-->
         <scene sceneID="9op-zT-QT5">
             <objects>
                 <tableViewController id="Cj6-hg-bnm" customClass="ToDoTableViewController" customModule="Santa_s_Workshope_Planner_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -346,6 +392,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="separatorColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="sectionIndexBackgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="santaToDo" textLabel="7WV-VA-0hp" style="IBUITableViewCellStyleDefault" id="LKz-8K-XrW">
@@ -372,9 +419,9 @@
                             <outlet property="delegate" destination="Cj6-hg-bnm" id="EaN-er-Lvk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="EXb-j8-Wd8">
+                    <navigationItem key="navigationItem" title="Santa's to do" id="EXb-j8-Wd8">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus.app" catalog="system" id="3PS-wk-tv6">
-                            <color key="tintColor" red="0.58823529409999997" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.43137254901960786" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="addNewItemTapped:" destination="Cj6-hg-bnm" id="Cjg-Yg-p0W"/>
                             </connections>
@@ -387,7 +434,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Santa’s Workshop Countdown" width="640" height="1136"/>
+        <image name="Santa’s Workshop Countdown-2" width="640" height="1136"/>
         <image name="gift.fill" catalog="system" width="128" height="125"/>
         <image name="giftcard" catalog="system" width="128" height="88"/>
         <image name="list.bullet.clipboard" catalog="system" width="98" height="128"/>

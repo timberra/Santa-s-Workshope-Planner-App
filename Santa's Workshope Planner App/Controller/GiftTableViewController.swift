@@ -17,7 +17,7 @@ class GiftTableViewController: UITableViewController {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
                 tableView.addGestureRecognizer(longPressGesture)
         let backButton = UIBarButtonItem()
-        backButton.title = "BACK" 
+        backButton.title = "Santa's nice list" 
         backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "PlayfairDisplay-Bold", size: 13)!], for: .normal)
         self.navigationItem.backBarButtonItem = backButton
         tableView.allowsSelection = true
