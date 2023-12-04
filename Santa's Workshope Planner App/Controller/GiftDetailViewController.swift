@@ -12,48 +12,39 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
     var selectedItem: SantaGift?
     var managedObjectContext: NSManagedObjectContext?
     var santasAddGifts = [SantaAddGift]()
-    var selectedPerson = ""
+    var selectedPersonID = 0
+    var selectedPersonName = ""
     var initialBudget = 0.0
     var budget = 0.0
     var rowHeights = [Int]()
     var defaultRowHeight = 50
-    
     @IBOutlet weak var giftPersonNameLabel: UILabel!
     @IBOutlet weak var totalBudgetLabel: UILabel!
     @IBOutlet weak var giftListTable: UITableView!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-                       managedObjectContext = appDelegate.persistentContainer.viewContext
-
-        print("ViewDidLoad is called.")
+        managedObjectContext = appDelegate.persistentContainer.viewContext
         self.giftListTable.dataSource = self
         self.giftListTable.delegate = self
         loadCoreData()
-
         rowHeights = Array(repeating: defaultRowHeight, count: giftListTable.numberOfRows(inSection: 0))
-
-    
         if let selectedSantaGift = selectedItem {
-            selectedPerson = selectedSantaGift.person ?? "Unknown Person"
+            selectedPersonName = selectedSantaGift.person ?? "Unknown Person"
+            selectedPersonID = Int(selectedSantaGift.id)
             initialBudget = selectedSantaGift.budget
             budget = initialBudget
-            print("Selected Person: \(selectedSantaGift.person ?? "Unknown Person")")
-            print("Selected Budget: \(selectedSantaGift.budget)")
             
             updateTextFields()
         } else {
             print("selectedItem is nil")
         }
     }
-    
     func updateTextFields(){
-        giftPersonNameLabel.text = "\(selectedPerson)"
-        totalBudgetLabel.text = "\(budget)"
+        giftPersonNameLabel.text = "\(selectedPersonName)"
+        let formattedBudget = String(format: "%.2f", budget)
+            totalBudgetLabel.text = "\(formattedBudget)"
     }
-    
     @IBAction func addGiftToList(_ sender: Any) {
         let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add new gift?", preferredStyle: .alert)
             alertController.addTextField { textFieldValue in
@@ -70,14 +61,12 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
                       let entity = NSEntityDescription.entity(forEntityName: "SantaAddGift", in: managedObjectContext) else {
                     return
                 }
-
                 let list = NSManagedObject(entity: entity, insertInto: managedObjectContext)
                 list.setValue(textField.text, forKey: "gift")
-                list.setValue(selectedPerson, forKey: "personID")
+                list.setValue(selectedPersonID, forKey: "personID")
                 if let budgetText = subtitleTextField.text, let budgetValue = Double(budgetText) {
                     list.setValue(budgetValue, forKey: "giftPrice")
                 }
-
                 self.saveCoreData()
                 self.santasAddGifts.append(list as! SantaAddGift)
                 budget = initialBudget
@@ -88,9 +77,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             alertController.addAction(cancelActionButton)
             present(alertController, animated: true)
         }
-    
-    // MARK: - TableView DataSource and Delegate methods
-    
+// MARK: - TableView DataSource and Delegate methods
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return santasAddGifts.count
@@ -104,9 +91,10 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         
         let santaGift = santasAddGifts[indexPath.row]
         cell.giftNameLabel?.text = santaGift.gift ?? ""
-        cell.giftPriceLabel?.text = "\(santaGift.giftPrice)"
+        cell.giftPriceLabel?.text = String(format: "%.2f", santaGift.giftPrice)
         
-        if santaGift.personID != selectedPerson {
+
+        if santaGift.personID != selectedPersonID {
             rowHeights[indexPath.row] = 0
         }
         else {
@@ -120,12 +108,12 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         
         return CGFloat(rowHeights[indexPath.row])
     }
-    
+
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
             self.budget = self.initialBudget
@@ -140,12 +128,10 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
     }
-
-    
     // MARK: - CoreData logic
     
     func loadCoreData() {
@@ -159,7 +145,6 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             fatalError("Error in loading item into core data")
         }
     }
-    
     func saveCoreData() {
         do {
             try managedObjectContext?.save()
@@ -168,17 +153,5 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             fatalError("Error in saving item into core data")
         }
         loadCoreData()
-    }
-    
-    func deleteAllCoreData() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SantaGift")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        do {
-            try managedObjectContext?.execute(deleteRequest)
-            santasAddGifts.removeAll()
-            self.giftListTable.reloadData()
-        } catch {
-            fatalError("Error in deleting all items from core data")
-        }
     }
 }
