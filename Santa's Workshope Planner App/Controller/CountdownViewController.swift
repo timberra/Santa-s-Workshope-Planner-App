@@ -23,20 +23,20 @@ class CountdownViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateCountdownLabel()
-        if let image = UIImage(named: "SantasHeader.png", in: Bundle.main, compatibleWith: nil) {
-                    let imageView = UIImageView(image: image)
-                    imageView.contentMode = .scaleAspectFit
-                    let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-                    titleView.addSubview(imageView)
-                    imageView.translatesAutoresizingMaskIntoConstraints = false
-                    NSLayoutConstraint.activate([
-                        imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-                        imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
-                    ])
-                    navigationItem.titleView = titleView
-        } else {
-            print("Image not found")
-        }
+//        if let image = UIImage(named: "SantasHeader.png", in: Bundle.main, compatibleWith: nil) {
+//                    let imageView = UIImageView(image: image)
+//                    imageView.contentMode = .scaleAspectFit
+//                    let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+//                    titleView.addSubview(imageView)
+//                    imageView.translatesAutoresizingMaskIntoConstraints = false
+//                    NSLayoutConstraint.activate([
+//                        imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+//                        imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+//                    ])
+//                    navigationItem.titleView = titleView
+//        } else {
+//            print("Image not found")
+//        }
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountdownLabel), userInfo: nil, repeats: true)
             }
             deinit {
