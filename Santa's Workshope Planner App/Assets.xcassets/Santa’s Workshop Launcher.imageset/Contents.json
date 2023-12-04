@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Santa’s Workshop Launcher.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
