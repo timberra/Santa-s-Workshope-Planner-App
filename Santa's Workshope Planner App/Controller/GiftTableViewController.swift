@@ -16,9 +16,12 @@ class GiftTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+                tableView.addGestureRecognizer(longPressGesture)
         let backButton = UIBarButtonItem()
         backButton.title = "BACK" 
         backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "PlayfairDisplay-Bold", size: 13)!], for: .normal)
+//        backButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(.black)], for: .normal)
         self.navigationItem.backBarButtonItem = backButton
         tableView.allowsSelection = true
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
@@ -27,6 +30,48 @@ class GiftTableViewController: UITableViewController {
         
 
     }
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+           if gestureRecognizer.state == .began {
+               let touchPoint = gestureRecognizer.location(in: tableView)
+               if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                   showEditAlert(indexPath: indexPath)
+               }
+           }
+       }
+    func showEditAlert(indexPath: IndexPath) {
+            let alertController = UIAlertController(title: "Edit Person", message: "Edit the person and budget values", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Edit person"
+                textField.text = self.santasGifts[indexPath.row].person
+            }
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Edit budget"
+                textField.text = "\(self.santasGifts[indexPath.row].budget)"
+                textField.keyboardType = .decimalPad
+            }
+            
+            let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+                let personTextField = alertController.textFields?.first
+                let budgetTextField = alertController.textFields?.last
+                
+                self.santasGifts[indexPath.row].person = personTextField?.text
+                if let budgetText = budgetTextField?.text, let budgetValue = Double(budgetText) {
+                    self.santasGifts[indexPath.row].budget = budgetValue
+                }
+                
+                self.saveCoreData()
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true)
+        }
+    
     @IBAction func addNewPersonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add new person for gift?", preferredStyle: .alert)
         alertController.addTextField { textFieldValue in

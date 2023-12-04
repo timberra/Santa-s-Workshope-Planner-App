@@ -121,9 +121,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         return CGFloat(rowHeights[indexPath.row])
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // cell selected code here
-    }
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -183,62 +181,4 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             fatalError("Error in deleting all items from core data")
         }
     }
-    
-//    // MARK: - Empty view logic
-//
-//        func setEmptyViewGiftDetail(title: String, message: String) {
-//            // Check if there are no items in the table view
-//            guard self.santasGifts.isEmpty else {
-//                // If there are items, reset background view and separator style
-//                self.giftListTable.backgroundView = nil
-//                self.giftListTable.separatorStyle = .singleLine
-//                return
-//            }
-//
-//            // Create a new empty view
-//            let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.giftListTable.bounds.size.width, height: self.giftListTable.bounds.size.height))
-//            let titleLabel = UILabel()
-//            let messageLabel = UILabel()
-//
-//            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//            messageLabel.translatesAutoresizingMaskIntoConstraints = false
-//
-//            titleLabel.textColor = UIColor.black
-//            titleLabel.font = UIFont(name: "Quando-Regular", size: 23)
-//
-//            messageLabel.textColor = UIColor.black
-//            messageLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 13)
-//
-//            emptyView.addSubview(titleLabel)
-//            emptyView.addSubview(messageLabel)
-//
-//            titleLabel.topAnchor.constraint(equalTo: emptyView.topAnchor).isActive = true
-//            titleLabel.leadingAnchor.constraint(equalTo: emptyView.leadingAnchor, constant: 20).isActive = true
-//            titleLabel.trailingAnchor.constraint(equalTo: emptyView.trailingAnchor, constant: -20).isActive = true
-//
-//            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-//            messageLabel.leadingAnchor.constraint(equalTo: emptyView.leadingAnchor, constant: 20).isActive = true
-//            messageLabel.trailingAnchor.constraint(equalTo: emptyView.trailingAnchor, constant: -20).isActive = true
-//            messageLabel.bottomAnchor.constraint(equalTo: emptyView.bottomAnchor).isActive = true
-//
-//            titleLabel.text = title
-//            titleLabel.numberOfLines = 0
-//            titleLabel.textAlignment = .center
-//
-//            messageLabel.text = message
-//            messageLabel.numberOfLines = 0
-//            messageLabel.textAlignment = .center
-//
-//            // Ensure that the title label wraps to multiple lines
-//            titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-//            titleLabel.setContentHuggingPriority(.required, for: .vertical)
-//
-//            self.giftListTable.backgroundView = emptyView
-//            self.giftListTable.separatorStyle = .none
-//        }
-//
-//        func restoreTableViewStyleGiftDetail() {
-//            self.giftListTable.backgroundView = nil
-//            self.giftListTable.separatorStyle = .singleLine
-//        }
-    }
+}

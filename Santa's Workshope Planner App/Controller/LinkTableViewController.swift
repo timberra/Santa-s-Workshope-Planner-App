@@ -108,7 +108,7 @@ extension UITableView {
             titleLabel.textColor = UIColor.black
             titleLabel.font = UIFont(name: "Quando-Regular", size: 27)
 
-            messageLabel.textColor = UIColor.lightGray
+            messageLabel.textColor = UIColor.black
             messageLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 13)
 
             emptyView.addSubview(titleLabel)
