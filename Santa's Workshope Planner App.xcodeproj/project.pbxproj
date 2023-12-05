@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA7B93082B1F99CD006EEE5A /* PlayfairDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA7B93072B1F99CD006EEE5A /* PlayfairDisplay-Regular.ttf */; };
 		FA7F0ABC2B1261B500888A80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F0ABB2B1261B500888A80 /* AppDelegate.swift */; };
 		FA7F0ABE2B1261B500888A80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F0ABD2B1261B500888A80 /* SceneDelegate.swift */; };
 		FA7F0AC02B1261B500888A80 /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F0ABF2B1261B500888A80 /* CountdownViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA7B93072B1F99CD006EEE5A /* PlayfairDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		FA7F0AB82B1261B500888A80 /* Santa's Workshope Planner App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Santa's Workshope Planner App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7F0ABB2B1261B500888A80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA7F0ABD2B1261B500888A80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				FA7F0AD52B134BF300888A80 /* Quando-Regular.ttf */,
 				FA7F0AD72B134BFC00888A80 /* lemon-tuesday.regular.otf */,
 				FA7F0AD92B134C2700888A80 /* PlayfairDisplay-Bold.ttf */,
+				FA7B93072B1F99CD006EEE5A /* PlayfairDisplay-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7F0ADA2B134C2700888A80 /* PlayfairDisplay-Bold.ttf in Resources */,
+				FA7B93082B1F99CD006EEE5A /* PlayfairDisplay-Regular.ttf in Resources */,
 				FA7F0ACB2B1261B800888A80 /* LaunchScreen.storyboard in Resources */,
 				FA7F0AD62B134BF300888A80 /* Quando-Regular.ttf in Resources */,
 				FA7F0AD82B134BFC00888A80 /* lemon-tuesday.regular.otf in Resources */,

@@ -140,10 +140,12 @@ extension UITableView {
          let messageLabel = UILabel()
          let infoLabel = UILabel() // Label for "Countdown till Christmas"
          let countdownLabel = UILabel()
+         let imageView = UIImageView()
          titleLabel.translatesAutoresizingMaskIntoConstraints = false
          messageLabel.translatesAutoresizingMaskIntoConstraints = false
          infoLabel.translatesAutoresizingMaskIntoConstraints = false
          countdownLabel.translatesAutoresizingMaskIntoConstraints = false
+         imageView.translatesAutoresizingMaskIntoConstraints = false
          titleLabel.textColor = UIColor.black
          titleLabel.font = UIFont(name: "Quando-Regular", size: 27)
          messageLabel.textColor = UIColor.black
@@ -152,24 +154,35 @@ extension UITableView {
          infoLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27) // Replace with your custom font
          countdownLabel.textColor = UIColor.black
          countdownLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27)
+         imageView.image = UIImage(named: "Lights 2")
          emptyView.addSubview(titleLabel)
          emptyView.addSubview(messageLabel)
          emptyView.addSubview(infoLabel)
          emptyView.addSubview(countdownLabel)
-         titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -40).isActive = true
+         emptyView.addSubview(imageView)
+         titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -80).isActive = true
          titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
          messageLabel.leadingAnchor.constraint(equalTo: emptyView.leadingAnchor, constant: 20).isActive = true
          messageLabel.trailingAnchor.constraint(equalTo: emptyView.trailingAnchor, constant: -20).isActive = true
-         infoLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 8).isActive = true
+         imageView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 8).isActive = true
+         imageView.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         imageView.widthAnchor.constraint(equalToConstant: 376).isActive = true
+         imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+         infoLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8).isActive = true
          infoLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         let infoLabelAttributedString = NSMutableAttributedString(string: "Countdown till Christmas")
+         let infoLabelLetterSpacing: CGFloat = 1.5
+         infoLabelAttributedString.addAttribute(NSAttributedString.Key.kern, value: infoLabelLetterSpacing, range: NSMakeRange(0, infoLabelAttributedString.length))
+         infoLabel.attributedText = infoLabelAttributedString
+         countdownLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 8).isActive = true
+         countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          countdownLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 8).isActive = true
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          titleLabel.text = title
          messageLabel.text = message
          messageLabel.numberOfLines = 0
          messageLabel.textAlignment = .center
-         infoLabel.text = "Countdown till Christmas"
          Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
              let currentDate = Date()
              let calendar = Calendar.current
