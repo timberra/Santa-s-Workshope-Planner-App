@@ -268,16 +268,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYt-hQ-njB">
-                                                    <rect key="frame" x="273" y="17" width="75" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYt-hQ-njB">
+                                                    <rect key="frame" x="273" y="17" width="75" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="TTZ-PT-O0L"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWs-RO-akv">
-                                                    <rect key="frame" x="31" y="17" width="107" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWs-RO-akv">
+                                                    <rect key="frame" x="31" y="17" width="107" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="107" id="ek6-yY-i7c"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -285,6 +289,15 @@
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="IYt-hQ-njB" firstAttribute="top" secondItem="dFe-kY-W0M" secondAttribute="topMargin" constant="6" id="0x1-vT-yug"/>
+                                                <constraint firstItem="JWs-RO-akv" firstAttribute="leading" secondItem="dFe-kY-W0M" secondAttribute="leadingMargin" constant="15" id="29m-lC-Zwi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="IYt-hQ-njB" secondAttribute="trailing" constant="11" id="GDf-Eg-2Dh"/>
+                                                <constraint firstItem="IYt-hQ-njB" firstAttribute="centerY" secondItem="dFe-kY-W0M" secondAttribute="centerY" id="KHv-2q-cSB"/>
+                                                <constraint firstItem="IYt-hQ-njB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JWs-RO-akv" secondAttribute="trailing" constant="8" symbolic="YES" id="ju5-eb-O3r"/>
+                                                <constraint firstItem="IYt-hQ-njB" firstAttribute="baseline" secondItem="JWs-RO-akv" secondAttribute="baseline" id="rtP-5q-67S"/>
+                                                <constraint firstItem="IYt-hQ-njB" firstAttribute="firstBaseline" secondItem="JWs-RO-akv" secondAttribute="firstBaseline" id="zzv-lu-dtZ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <connections>
@@ -298,8 +311,8 @@
                                     <outlet property="delegate" destination="mgs-iT-P23" id="44P-82-c2M"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6O-1i-qEH">
-                                <rect key="frame" x="119" y="64" width="136" height="53"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6O-1i-qEH">
+                                <rect key="frame" x="119" y="64" width="137" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="hGr-nQ-esI"/>
                                 </constraints>
@@ -310,7 +323,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdJ-z0-Mat">
                                 <rect key="frame" x="72" y="150" width="73" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="voc-WP-iBD"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="voc-WP-iBD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -328,8 +341,8 @@
                                     <action selector="addGiftToList:" destination="mgs-iT-P23" eventType="touchUpInside" id="gul-dY-OgB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6m5-EQ-XSE">
-                                <rect key="frame" x="227" y="156" width="85" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6m5-EQ-XSE">
+                                <rect key="frame" x="251.5" y="156.5" width="60.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -347,15 +360,16 @@
                             <constraint firstItem="NdJ-z0-Mat" firstAttribute="top" secondItem="z6O-1i-qEH" secondAttribute="bottom" constant="33" id="LSe-YU-M5l"/>
                             <constraint firstItem="NdJ-z0-Mat" firstAttribute="top" secondItem="jVK-Ad-DHa" secondAttribute="bottom" id="NmL-Ky-Yec"/>
                             <constraint firstItem="jVK-Ad-DHa" firstAttribute="leading" secondItem="bTg-CO-EXX" secondAttribute="leading" id="PXH-TT-wX5"/>
+                            <constraint firstItem="J2k-ol-GdP" firstAttribute="trailing" secondItem="6m5-EQ-XSE" secondAttribute="trailing" constant="63" id="Q3X-po-gYN"/>
                             <constraint firstItem="J2k-ol-GdP" firstAttribute="trailing" secondItem="Y7A-b8-KJZ" secondAttribute="trailing" constant="16" id="U3j-n8-Cpc"/>
-                            <constraint firstItem="Y7A-b8-KJZ" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" constant="16" id="VPE-Gk-Hgc"/>
+                            <constraint firstItem="Y7A-b8-KJZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="J2k-ol-GdP" secondAttribute="leading" id="VPE-Gk-Hgc"/>
                             <constraint firstItem="NdJ-z0-Mat" firstAttribute="centerY" secondItem="6m5-EQ-XSE" secondAttribute="centerY" id="XZr-AS-GV6"/>
                             <constraint firstItem="z6O-1i-qEH" firstAttribute="top" secondItem="J2k-ol-GdP" secondAttribute="top" id="ZmC-lx-wad"/>
                             <constraint firstItem="bTg-CO-EXX" firstAttribute="top" secondItem="NdJ-z0-Mat" secondAttribute="bottom" constant="5" id="Zry-mO-aib"/>
                             <constraint firstItem="jVK-Ad-DHa" firstAttribute="top" secondItem="J2k-ol-GdP" secondAttribute="top" constant="48" id="ale-iu-NKv"/>
                             <constraint firstItem="bTg-CO-EXX" firstAttribute="trailing" secondItem="J2k-ol-GdP" secondAttribute="trailing" id="eso-uK-MdA"/>
                             <constraint firstItem="bTg-CO-EXX" firstAttribute="top" secondItem="a9f-7s-IMx" secondAttribute="top" constant="189" id="g3r-02-b86"/>
-                            <constraint firstItem="6m5-EQ-XSE" firstAttribute="leading" secondItem="NdJ-z0-Mat" secondAttribute="trailing" constant="82" id="jEf-gb-ayK"/>
+                            <constraint firstItem="6m5-EQ-XSE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NdJ-z0-Mat" secondAttribute="trailing" constant="8" symbolic="YES" id="jEf-gb-ayK"/>
                             <constraint firstItem="bTg-CO-EXX" firstAttribute="centerX" secondItem="z6O-1i-qEH" secondAttribute="centerX" id="kse-rh-AUu"/>
                             <constraint firstItem="NdJ-z0-Mat" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" constant="72" id="nsp-Hu-FME"/>
                             <constraint firstItem="jVK-Ad-DHa" firstAttribute="trailing" secondItem="bTg-CO-EXX" secondAttribute="trailing" id="p3h-S6-P0Q"/>
