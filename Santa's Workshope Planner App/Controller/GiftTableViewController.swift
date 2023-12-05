@@ -12,61 +12,64 @@ class GiftTableViewController: UITableViewController {
     var managedObjectContext: NSManagedObjectContext?
     var santasGifts = [SantaGift]()
     var santasAddGifts = [SantaAddGift]()
+    var cellAddOrder = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-                tableView.addGestureRecognizer(longPressGesture)
+        tableView.addGestureRecognizer(longPressGesture)
         let backButton = UIBarButtonItem()
-        backButton.title = "Santa's nice list" 
+        backButton.title = "Santa's nice list"
         backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "PlayfairDisplay-Bold", size: 13)!], for: .normal)
         self.navigationItem.backBarButtonItem = backButton
         tableView.allowsSelection = true
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-                managedObjectContext = appDelegate.persistentContainer.viewContext
-                loadCoreData()
+        managedObjectContext = appDelegate.persistentContainer.viewContext
+        loadCoreData()
     }
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-           if gestureRecognizer.state == .began {
-               let touchPoint = gestureRecognizer.location(in: tableView)
-               if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                   showEditAlert(indexPath: indexPath)
-               }
-           }
-       }
-    func showEditAlert(indexPath: IndexPath) {
-            let alertController = UIAlertController(title: "Edit Person", message: "Edit the person and budget values", preferredStyle: .alert)
-            alertController.addTextField { textField in
-                textField.placeholder = "Edit person"
-                textField.text = self.santasGifts[indexPath.row].person
+        if gestureRecognizer.state == .began {
+            let touchPoint = gestureRecognizer.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                showEditAlert(indexPath: indexPath)
             }
-            alertController.addTextField { textField in
-                textField.placeholder = "Edit budget"
-                textField.text = "\(self.santasGifts[indexPath.row].budget)"
-                textField.keyboardType = .decimalPad
-            }
-            let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
-                let personTextField = alertController.textFields?.first
-                let budgetTextField = alertController.textFields?.last
-                self.santasGifts[indexPath.row].person = personTextField?.text
-                if let budgetText = budgetTextField?.text, let budgetValue = Double(budgetText) {
-                    self.santasGifts[indexPath.row].budget = budgetValue
-                }
-                self.saveCoreData()
-            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-            alertController.addAction(saveAction)
-            alertController.addAction(cancelAction)
-            present(alertController, animated: true)
         }
+    }
+    func showEditAlert(indexPath: IndexPath) {
+        let alertController = UIAlertController(title: "Edit Person", message: "Edit the person and budget values", preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Edit person"
+            textField.text = self.santasGifts[indexPath.row].person
+        }
+        alertController.addTextField { textField in
+            textField.placeholder = "Edit budget"
+            textField.text = "\(self.santasGifts[indexPath.row].budget)"
+            textField.keyboardType = .decimalPad
+        }
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+            let personTextField = alertController.textFields?.first
+            let budgetTextField = alertController.textFields?.last
+            self.santasGifts[indexPath.row].person = personTextField?.text
+            if let budgetText = budgetTextField?.text, let budgetValue = Double(budgetText) {
+                self.santasGifts[indexPath.row].budget = budgetValue
+            }
+            self.saveCoreData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
     
     @IBAction func addNewPersonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add new person for gift?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add a new person for a gift?", preferredStyle: .alert)
         alertController.addTextField { textFieldValue in
             textFieldValue.placeholder = "Your person here.."
         }
         alertController.addTextField { subtextFieldValue in
             subtextFieldValue.placeholder = "Your budget here.."
         }
+        
         let addActionButton = UIAlertAction(title: "Add", style: .default) { addActions in
             let textField = alertController.textFields?.first
             let subtitletextField = alertController.textFields?.last
@@ -77,8 +80,13 @@ class GiftTableViewController: UITableViewController {
             if let budgetText = subtitletextField?.text, let budgetValue = Double(budgetText) {
                 list.setValue(budgetValue, forKey: "budget")
             }
+        
+            list.setValue(self.cellAddOrder % 2 == 0 ? "#7a251f" : "#37523e", forKey: "cellColor")
+            
+            self.cellAddOrder += 1
             self.saveCoreData()
         }
+        
         let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
         alertController.addAction(addActionButton)
         alertController.addAction(cancelActionButton)
@@ -137,6 +145,11 @@ extension GiftTableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: "santaGiftCell", for: indexPath)
         let santasGift = santasGifts[indexPath.row]
         cell.textLabel?.text = santasGift.person
+        if let cellColor = santasGift.value(forKey: "cellColor") as? String {
+            cell.backgroundColor = UIColor(hex: cellColor)
+        } else {
+            cell.backgroundColor = .white
+        }
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

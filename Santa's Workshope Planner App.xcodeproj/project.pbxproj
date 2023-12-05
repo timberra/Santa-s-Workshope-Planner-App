@@ -19,6 +19,7 @@
 		FA7F0ADA2B134C2700888A80 /* PlayfairDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA7F0AD92B134C2700888A80 /* PlayfairDisplay-Bold.ttf */; };
 		FA7F0AE12B1609BA00888A80 /* ButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F0AE02B1609BA00888A80 /* ButtonItems.swift */; };
 		FA7F0AE52B1625D600888A80 /* LinkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F0AE42B1625D600888A80 /* LinkTableViewController.swift */; };
+		FA8881422B1E9542007378DA /* HEXColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8881412B1E9542007378DA /* HEXColor.swift */; };
 		FA9F7F1A2B1774F000A3B053 /* GiftTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F7F192B1774F000A3B053 /* GiftTableViewController.swift */; };
 		FA9F7F1C2B1790F100A3B053 /* GiftDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F7F1B2B1790F100A3B053 /* GiftDetailViewController.swift */; };
 		FA9F7F1E2B1A0B1200A3B053 /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F7F1D2B1A0B1200A3B053 /* ToDoTableViewController.swift */; };
@@ -40,6 +41,7 @@
 		FA7F0AD92B134C2700888A80 /* PlayfairDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		FA7F0AE02B1609BA00888A80 /* ButtonItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonItems.swift; sourceTree = "<group>"; };
 		FA7F0AE42B1625D600888A80 /* LinkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTableViewController.swift; sourceTree = "<group>"; };
+		FA8881412B1E9542007378DA /* HEXColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HEXColor.swift; sourceTree = "<group>"; };
 		FA9F7F192B1774F000A3B053 /* GiftTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftTableViewController.swift; sourceTree = "<group>"; };
 		FA9F7F1B2B1790F100A3B053 /* GiftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDetailViewController.swift; sourceTree = "<group>"; };
 		FA9F7F1D2B1A0B1200A3B053 /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				FA7F0AD42B12620300888A80 /* View */,
 				FA7F0AC72B1261B800888A80 /* Assets.xcassets */,
 				FA7F0ACC2B1261B800888A80 /* Info.plist */,
+				FA8881412B1E9542007378DA /* HEXColor.swift */,
 				FA7F0AC42B1261B500888A80 /* Santa_s_Workshope_Planner_App.xcdatamodeld */,
 				FA7F0ADB2B134C4B00888A80 /* Fonts */,
 			);
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7F0AC02B1261B500888A80 /* CountdownViewController.swift in Sources */,
+				FA8881422B1E9542007378DA /* HEXColor.swift in Sources */,
 				FA9F7F1E2B1A0B1200A3B053 /* ToDoTableViewController.swift in Sources */,
 				FA7F0AE52B1625D600888A80 /* LinkTableViewController.swift in Sources */,
 				FA9F7F1A2B1774F000A3B053 /* GiftTableViewController.swift in Sources */,

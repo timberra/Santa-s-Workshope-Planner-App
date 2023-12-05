@@ -392,7 +392,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <color key="separatorColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="separatorColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="sectionIndexBackgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="santaToDo" textLabel="7WV-VA-0hp" style="IBUITableViewCellStyleDefault" id="LKz-8K-XrW">
