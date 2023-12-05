@@ -30,7 +30,6 @@
                         <color key="selectedImageTintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
-                        <segue destination="eed-LJ-SCK" kind="relationship" relationship="viewControllers" id="kgI-hJ-XeM"/>
                         <segue destination="mfn-EE-ovU" kind="relationship" relationship="viewControllers" id="RhT-O1-3Wo"/>
                         <segue destination="sro-Ca-d97" kind="relationship" relationship="viewControllers" id="aUC-Mw-1Fa"/>
                         <segue destination="qR1-7K-Flq" kind="relationship" relationship="viewControllers" id="w8c-qe-rPR"/>
@@ -58,23 +57,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6e-Ty-h6G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-119" y="-107"/>
-        </scene>
-        <!--Clock-->
-        <scene sceneID="a8g-BY-5eF">
-            <objects>
-                <navigationController id="eed-LJ-SCK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Clock" image="timelapse" catalog="system" id="xTD-WE-im3"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hC2-HU-O0C">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="iJf-ux-72r" kind="relationship" relationship="rootViewController" id="iUf-z7-4Dq"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zjh-wy-znh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1094" y="-107"/>
         </scene>
@@ -119,35 +101,48 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Santa's link list" id="OT2-jV-MpH">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus.app" catalog="system" id="4kL-Jm-jvH">
-                            <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <connections>
-                                <action selector="addNewItemTapped:" destination="adx-UN-hWq" id="mWH-VS-dKe"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="plus.app" catalog="system" id="4kL-Jm-jvH">
+                                <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="addNewItemTapped:" destination="adx-UN-hWq" id="mWH-VS-dKe"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="timelapse" catalog="system" id="f9C-rM-XdD">
+                                <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <segue destination="iJf-ux-72r" kind="popoverPresentation" popoverAnchorBarButtonItem="f9C-rM-XdD" id="YwO-PG-bVX">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="countdownTillLink" destination="f9C-rM-XdD" id="izz-Fg-Y7W"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2v-MJ-v51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-119" y="636"/>
+            <point key="canvasLocation" x="1094" y="636"/>
         </scene>
         <!--Countdown View Controller-->
         <scene sceneID="Kv7-fW-8dC">
             <objects>
                 <viewController id="iJf-ux-72r" customClass="CountdownViewController" customModule="Santa_s_Workshope_Planner_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F88-2j-ICv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Santa’s Workshop Countdown-2" translatesAutoresizingMaskIntoConstraints="NO" id="o9z-ao-pzj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Lights 2" translatesAutoresizingMaskIntoConstraints="NO" id="8E6-fJ-4j3">
                                 <rect key="frame" x="0.0" y="334" width="375" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxN-M8-fNr">
-                                <rect key="frame" x="16" y="396" width="343" height="93"/>
+                                <rect key="frame" x="16" y="332" width="343" height="186"/>
                                 <fontDescription key="fontDescription" name="LemonTuesday" family="Lemon Tuesday" pointSize="47"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -173,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-Th-hdx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1093.5999999999999" y="635.53223388305855"/>
+            <point key="canvasLocation" x="1094" y="1659"/>
         </scene>
         <!--Gift-->
         <scene sceneID="iII-VU-Tkm">
@@ -194,7 +189,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIz-4z-8aB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1492" y="-107"/>
+            <point key="canvasLocation" x="-455" y="-107"/>
         </scene>
         <!--Santa's nice list-->
         <scene sceneID="wuc-4k-L4g">
@@ -232,17 +227,30 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Santa's nice list" id="vaZ-YR-VZB">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus.app" catalog="system" id="6ws-W5-Igb">
-                            <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <connections>
-                                <action selector="addNewPersonTapped:" destination="eew-E2-3GC" id="0h1-3I-fJX"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="plus.app" catalog="system" id="6ws-W5-Igb">
+                                <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="addNewPersonTapped:" destination="eew-E2-3GC" id="0h1-3I-fJX"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="timelapse" catalog="system" id="sos-Cy-A2f">
+                                <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <segue destination="iJf-ux-72r" kind="popoverPresentation" popoverAnchorBarButtonItem="sos-Cy-A2f" id="vHD-V3-5yu">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="countdownTillGift" destination="sos-Cy-A2f" id="U3t-AN-pc1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rn3-QL-VUH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1492" y="637"/>
+            <point key="canvasLocation" x="-455" y="678"/>
         </scene>
         <!--Gift Detail View Controller-->
         <scene sceneID="dkQ-bb-3QA">
@@ -345,7 +353,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6m5-EQ-XSE">
-                                <rect key="frame" x="251.5" y="156.5" width="60.5" height="21"/>
+                                <rect key="frame" x="251.5" y="156.5" width="60.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Quando-Regular" family="Quando" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -389,7 +397,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ey-bZ-QU7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1492" y="1441.529235382309"/>
+            <point key="canvasLocation" x="-455" y="1447"/>
         </scene>
         <!--To Do-->
         <scene sceneID="RRt-aC-hbQ">
@@ -448,19 +456,36 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Santa's to do" id="EXb-j8-Wd8">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus.app" catalog="system" id="3PS-wk-tv6">
-                            <color key="tintColor" red="0.43137254901960786" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <connections>
-                                <action selector="addNewItemTapped:" destination="Cj6-hg-bnm" id="Cjg-Yg-p0W"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="plus.app" catalog="system" id="3PS-wk-tv6">
+                                <color key="tintColor" red="0.43137254901960786" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="addNewItemTapped:" destination="Cj6-hg-bnm" id="Cjg-Yg-p0W"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="timelapse" catalog="system" id="w3E-cZ-MuU">
+                                <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <segue destination="iJf-ux-72r" kind="popoverPresentation" popoverAnchorBarButtonItem="w3E-cZ-MuU" id="qTX-LT-M6z">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="countdownTillToDo" destination="w3E-cZ-MuU" id="apu-Zl-j7b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LxV-l1-HIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2433" y="636"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="vHD-V3-5yu"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
         <image name="2" width="640" height="40"/>
         <image name="Lights" width="640" height="40"/>
