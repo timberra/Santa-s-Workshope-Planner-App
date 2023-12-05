@@ -129,9 +129,9 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         return configuration
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//    }
     // MARK: - CoreData logic
     
     func loadCoreData() {

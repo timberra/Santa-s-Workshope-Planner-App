@@ -40,11 +40,11 @@
             </objects>
             <point key="canvasLocation" x="1094" y="-867"/>
         </scene>
-        <!--Item-->
+        <!--Idea-->
         <scene sceneID="tcO-xr-FgQ">
             <objects>
                 <navigationController id="sro-Ca-d97" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="giftcard" catalog="system" id="V7b-sS-9y4"/>
+                    <tabBarItem key="tabBarItem" title="Idea" image="giftcard" catalog="system" id="V7b-sS-9y4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="V7P-ZZ-aXH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -61,11 +61,11 @@
             </objects>
             <point key="canvasLocation" x="-119" y="-107"/>
         </scene>
-        <!--Item-->
+        <!--Clock-->
         <scene sceneID="a8g-BY-5eF">
             <objects>
                 <navigationController id="eed-LJ-SCK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="timelapse" catalog="system" id="xTD-WE-im3"/>
+                    <tabBarItem key="tabBarItem" title="Clock" image="timelapse" catalog="system" id="xTD-WE-im3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hC2-HU-O0C">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -171,11 +171,11 @@
             </objects>
             <point key="canvasLocation" x="1093.5999999999999" y="635.53223388305855"/>
         </scene>
-        <!--Item-->
+        <!--Gift-->
         <scene sceneID="iII-VU-Tkm">
             <objects>
                 <navigationController id="mfn-EE-ovU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="gift.fill" catalog="system" id="dHG-mK-wDq"/>
+                    <tabBarItem key="tabBarItem" title="Gift" image="gift.fill" catalog="system" id="dHG-mK-wDq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qSe-RT-5KL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -363,11 +363,11 @@
             </objects>
             <point key="canvasLocation" x="-1492" y="1441.529235382309"/>
         </scene>
-        <!--Item-->
+        <!--To Do-->
         <scene sceneID="RRt-aC-hbQ">
             <objects>
                 <navigationController id="qR1-7K-Flq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="list.bullet.clipboard" catalog="system" id="Ju5-M7-o6W"/>
+                    <tabBarItem key="tabBarItem" title="To Do" image="list.bullet.clipboard" catalog="system" id="Ju5-M7-o6W"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="duo-Qb-er9">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
