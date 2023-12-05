@@ -64,39 +64,44 @@ class GiftTableViewController: UITableViewController {
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
-    
     @IBAction func addNewPersonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add a new person for a gift?", preferredStyle: .alert)
-        alertController.addTextField { textFieldValue in
-            textFieldValue.placeholder = "Your person here.."
-        }
-        alertController.addTextField { subtextFieldValue in
-            subtextFieldValue.placeholder = "Your budget here.."
-        }
-        
-        let addActionButton = UIAlertAction(title: "Add", style: .default) { addActions in
-            let textField = alertController.textFields?.first
-            let subtitletextField = alertController.textFields?.last
-            let entity = NSEntityDescription.entity(forEntityName: "SantaGift", in: self.managedObjectContext!)
-            let list = NSManagedObject(entity: entity!, insertInto: self.managedObjectContext)
-            list.setValue(Date().timeIntervalSince1970, forKey: "id")
-            list.setValue(textField?.text, forKey: "person")
-            if let budgetText = subtitletextField?.text, let budgetValue = Double(budgetText) {
-                list.setValue(budgetValue, forKey: "budget")
+            alertController.addTextField { textFieldValue in
+                textFieldValue.placeholder = "Your person here.."
             }
-        
-            list.setValue(self.cellAddOrder % 2 == 0 ? "#7a251f" : "#37523e", forKey: "cellColor")
-            
-            self.cellAddOrder += 1
-            self.updateBarButtonItems()
-            self.saveCoreData()
+            alertController.addTextField { subtextFieldValue in
+                subtextFieldValue.placeholder = "Your budget here.."
+                subtextFieldValue.keyboardType = .decimalPad
+            }
+            let addActionButton = UIAlertAction(title: "Add", style: .default) { addActions in
+                guard let textField = alertController.textFields?.first,
+                      let subtitletextField = alertController.textFields?.last,
+                      let budgetText = subtitletextField.text,
+                      let budgetValue = Double(budgetText) else {
+                    self.showErrorMessage(message: "Please fill in budget field with numeric characters.")
+                    return
+                }
+                let entity = NSEntityDescription.entity(forEntityName: "SantaGift", in: self.managedObjectContext!)
+                let list = NSManagedObject(entity: entity!, insertInto: self.managedObjectContext)
+                list.setValue(Date().timeIntervalSince1970, forKey: "id")
+                list.setValue(textField.text, forKey: "person")
+                list.setValue(budgetValue, forKey: "budget")
+                list.setValue(self.cellAddOrder % 2 == 0 ? "#7a251f" : "#37523e", forKey: "cellColor")
+                self.cellAddOrder += 1
+                self.updateBarButtonItems()
+                self.saveCoreData()
+            }
+            let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
+            alertController.addAction(addActionButton)
+            alertController.addAction(cancelActionButton)
+            present(alertController, animated: true)
         }
-        
-        let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
-        alertController.addAction(addActionButton)
-        alertController.addAction(cancelActionButton)
-        present(alertController, animated: true)
-    }
+        func showErrorMessage(message: String) {
+            let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            errorAlert.addAction(okAction)
+            present(errorAlert, animated: true, completion: nil)
+        }
     func updateBarButtonItems() {
         if isGiftViewEmpty && !tableView.isEmptyGiftViewActive {
             countdownTillGift.isEnabled = false
@@ -104,17 +109,14 @@ class GiftTableViewController: UITableViewController {
             countdownTillGift.isEnabled = true
         }
     }
-
 }
 //MARK: - Empty view logic
 extension UITableView {
     var isEmptyGiftViewActive: Bool {
          return self.backgroundView != nil
      }
-
      func setEmptyGiftView(title: String, message: String, targetMonth: Int, targetDay: Int) {
          guard !isEmptyGiftViewActive else { return }
-
          self.backgroundView = nil
          self.separatorStyle = .singleLine
          let currentYear = Calendar.current.component(.year, from: Date())
@@ -183,7 +185,6 @@ extension UITableView {
          }
          self.backgroundView = emptyView
      }
-
      func restoreGiftTableViewStyle() {
          guard isEmptyViewActive else { return }
 
@@ -259,8 +260,6 @@ extension GiftTableViewController{
             let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
             return configuration
         }
-//        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        }
     }
     //MARK: - Send data
     extension GiftTableViewController {
@@ -274,9 +273,3 @@ extension GiftTableViewController{
             }
         }
     }
-
-
-
-        
-    
-

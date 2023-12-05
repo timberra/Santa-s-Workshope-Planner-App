@@ -104,10 +104,8 @@ extension UITableView {
     var isEmptyLinkViewActive: Bool {
          return self.backgroundView != nil
      }
-
      func setEmptyLinkView(title: String, message: String, targetMonth: Int, targetDay: Int) {
          guard !isEmptyLinkViewActive else { return }
-
          self.backgroundView = nil
          self.separatorStyle = .singleLine
          let currentYear = Calendar.current.component(.year, from: Date())
@@ -222,7 +220,6 @@ extension LinkTableViewController {
     }
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
-            // Your delete logic here
             self.managedObjectContext?.delete(self.santasLinks[indexPath.row])
             self.saveCoreData()
             if (self.santasLinks.isEmpty) {
@@ -233,7 +230,4 @@ extension LinkTableViewController {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//    }
 }

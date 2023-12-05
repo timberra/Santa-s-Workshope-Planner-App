@@ -44,57 +44,60 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         giftPersonNameLabel.text = "\(selectedPersonName)"
         giftPersonNameLabel.textColor = UIColor(hex: "#6E140D")
         let formattedBudget = String(format: "%.2f", budget)
-            totalBudgetLabel.text = "\(formattedBudget)"
+        totalBudgetLabel.text = "\(formattedBudget)"
     }
     @IBAction func addGiftToList(_ sender: Any) {
         let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add new gift?", preferredStyle: .alert)
-            alertController.addTextField { textFieldValue in
-                textFieldValue.placeholder = "Your gift here.."
-            }
-            alertController.addTextField { subtextFieldValue in
-                subtextFieldValue.placeholder = "Price for gift here.."
-            }
-            let addActionButton = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-                guard let self = self,
-                      let textField = alertController.textFields?.first,
-                      let subtitleTextField = alertController.textFields?.last,
-                      let managedObjectContext = self.managedObjectContext,
-                      let entity = NSEntityDescription.entity(forEntityName: "SantaAddGift", in: managedObjectContext) else {
-                    return
-                }
-                let list = NSManagedObject(entity: entity, insertInto: managedObjectContext)
-                list.setValue(textField.text, forKey: "gift")
-                list.setValue(selectedPersonID, forKey: "personID")
-                if let budgetText = subtitleTextField.text, let budgetValue = Double(budgetText) {
-                    list.setValue(budgetValue, forKey: "giftPrice")
-                }
-                self.saveCoreData()
-                self.santasAddGifts.append(list as! SantaAddGift)
-                budget = initialBudget
-                rowHeights.append(defaultRowHeight)
-            }
-            let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
-            alertController.addAction(addActionButton)
-            alertController.addAction(cancelActionButton)
-            present(alertController, animated: true)
+        alertController.addTextField { textFieldValue in
+            textFieldValue.placeholder = "Your gift here.."
         }
+        alertController.addTextField { subtextFieldValue in
+            subtextFieldValue.placeholder = "Price for gift here.."
+            subtextFieldValue.keyboardType = .decimalPad
+        }
+        let addActionButton = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            guard let self = self,
+                  let textField = alertController.textFields?.first,
+                  let subtitleTextField = alertController.textFields?.last,
+                  let managedObjectContext = self.managedObjectContext,
+                  let entity = NSEntityDescription.entity(forEntityName: "SantaAddGift", in: managedObjectContext) else {
+                return
+            }
+            guard let budgetText = subtitleTextField.text,
+                  let budgetValue = Double(budgetText) else {
+                self.showErrorMessage(message: "Please enter a valid price for the gift.")
+                return
+            }
+            let list = NSManagedObject(entity: entity, insertInto: managedObjectContext)
+            list.setValue(textField.text, forKey: "gift")
+            list.setValue(selectedPersonID, forKey: "personID")
+            list.setValue(budgetValue, forKey: "giftPrice")
+            self.saveCoreData()
+            self.santasAddGifts.append(list as! SantaAddGift)
+            budget = initialBudget
+            rowHeights.append(defaultRowHeight)
+        }
+        let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
+        alertController.addAction(addActionButton)
+        alertController.addAction(cancelActionButton)
+        present(alertController, animated: true)
+    }
+    func showErrorMessage(message: String) {
+        let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        errorAlert.addAction(okAction)
+        present(errorAlert, animated: true, completion: nil)
+    }
 // MARK: - TableView DataSource and Delegate methods
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return santasAddGifts.count
         }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("Cell for row at index path: \(indexPath.row)")
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "giftPriceCell", for: indexPath) as! GiftDetailTableViewCell
-        
         let santaGift = santasAddGifts[indexPath.row]
         cell.giftNameLabel?.text = santaGift.gift ?? ""
         cell.giftPriceLabel?.text = String(format: "%.2f", santaGift.giftPrice)
-        
-
         if santaGift.personID != selectedPersonID {
             rowHeights[indexPath.row] = 0
         }
@@ -104,17 +107,12 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         }
         return cell
     }
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return CGFloat(rowHeights[indexPath.row])
     }
-
-
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
             self.budget = self.initialBudget
@@ -124,15 +122,9 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             completionHandler(true)
         }
         
-
-        
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//    }
     // MARK: - CoreData logic
     
     func loadCoreData() {

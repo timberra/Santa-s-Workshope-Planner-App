@@ -78,7 +78,6 @@ extension UITableView {
     var isEmptyViewActive: Bool {
          return self.backgroundView != nil
      }
-
      func setEmptyToDoView(title: String, message: String, targetMonth: Int, targetDay: Int) {
          guard !isEmptyViewActive else { return }
 
@@ -200,7 +199,5 @@ extension ToDoTableViewController {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//    }
 }
 
