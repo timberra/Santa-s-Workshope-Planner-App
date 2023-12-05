@@ -42,6 +42,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
     }
     func updateTextFields(){
         giftPersonNameLabel.text = "\(selectedPersonName)"
+        giftPersonNameLabel.textColor = UIColor(hex: "#6E140D")
         let formattedBudget = String(format: "%.2f", budget)
             totalBudgetLabel.text = "\(formattedBudget)"
     }
