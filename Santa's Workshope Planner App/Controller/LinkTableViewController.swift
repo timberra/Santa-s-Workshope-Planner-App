@@ -22,11 +22,53 @@ class LinkTableViewController: UITableViewController {
         }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+            tableView.addGestureRecognizer(longPressGesture)
         updateBarButtonItems()
         tableView.allowsSelection = true
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         managedObjectContext = appDelegate.persistentContainer.viewContext
         loadCoreData()
+    }
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            let point = gestureRecognizer.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: point) {
+                showEditAlert(forIndexPath: indexPath)
+            }
+        }
+    }
+    func showEditAlert(forIndexPath indexPath: IndexPath) {
+        let alertController = UIAlertController(title: "Edit Link", message: "Edit the link details", preferredStyle: .alert)
+
+        alertController.addTextField { textFieldValue in
+            textFieldValue.text = self.santasLinks[indexPath.row].linkDetail
+        }
+
+        alertController.addTextField { subtextFieldValue in
+            subtextFieldValue.text = self.santasLinks[indexPath.row].link
+        }
+
+        let editActionButton = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
+            guard let self = self,
+                  let textField = alertController.textFields?.first,
+                  let subtitleTextField = alertController.textFields?.last else {
+                return
+            }
+
+            let editedLink = self.santasLinks[indexPath.row]
+            editedLink.linkDetail = textField.text
+            editedLink.link = subtitleTextField.text
+            self.saveCoreData()
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+
+        let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
+
+        alertController.addAction(editActionButton)
+        alertController.addAction(cancelActionButton)
+
+        present(alertController, animated: true)
     }
     @IBAction func addNewItemTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Santas Link Workshop", message: "Do you want to add a new link", preferredStyle: .alert)
@@ -186,7 +228,7 @@ extension UITableView {
 extension LinkTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if santasLinks.count == 0 {
-            tableView.setEmptyLinkView(title: "Your Santa's Workshop", message: "Please press Add to create a new to-do item", targetMonth: 12, targetDay: 25)
+            tableView.setEmptyLinkView(title: "Your Santa's Workshop", message: "Please press Add to create a new Santa's Link", targetMonth: 12, targetDay: 25)
         } else {
             tableView.restoreToDoTableViewStyle()
         }

@@ -161,7 +161,7 @@ extension UITableView {
 extension ToDoTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if santasToDo.count == 0 {
-            tableView.setEmptyToDoView(title: "Your Santa's Workshop", message: "Please press Add to create a new to-do item", targetMonth: 12, targetDay: 25)
+            tableView.setEmptyToDoView(title: "Your Santa's Workshop", message: "Please press Add to create a new Santa's to-do", targetMonth: 12, targetDay: 25)
         } else {
             tableView.restoreToDoTableViewStyle()
         }

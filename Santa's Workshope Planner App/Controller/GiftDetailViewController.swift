@@ -23,6 +23,8 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var giftListTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+            giftListTable.addGestureRecognizer(longPressGesture)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         managedObjectContext = appDelegate.persistentContainer.viewContext
         self.giftListTable.dataSource = self
@@ -40,6 +42,54 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             print("selectedItem is nil")
         }
     }
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            let point = gestureRecognizer.location(in: giftListTable)
+            if let indexPath = giftListTable.indexPathForRow(at: point) {
+                showEditAlert(forIndexPath: indexPath)
+            }
+        }
+    }
+    func showEditAlert(forIndexPath indexPath: IndexPath) {
+        let alertController = UIAlertController(title: "Edit Gift", message: "Edit the gift details", preferredStyle: .alert)
+
+        alertController.addTextField { textFieldValue in
+            textFieldValue.text = self.santasAddGifts[indexPath.row].gift
+        }
+
+        alertController.addTextField { subtextFieldValue in
+            subtextFieldValue.text = String(self.santasAddGifts[indexPath.row].giftPrice)
+            subtextFieldValue.keyboardType = .decimalPad
+        }
+
+        let editActionButton = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
+            guard let self = self,
+                  let textField = alertController.textFields?.first,
+                  let subtitleTextField = alertController.textFields?.last else {
+                return
+            }
+
+            let editedGift = self.santasAddGifts[indexPath.row]
+            editedGift.gift = textField.text
+            if let budgetText = subtitleTextField.text,
+               let budgetValue = Double(budgetText) {
+                editedGift.giftPrice = budgetValue
+                self.saveCoreData()
+                self.giftListTable.reloadRows(at: [indexPath], with: .automatic)
+                self.budget = self.initialBudget
+                self.updateTextFields()
+            } else {
+                self.showErrorMessage(message: "Please enter a valid price for the gift.")
+            }
+        }
+
+        let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
+
+        alertController.addAction(editActionButton)
+        alertController.addAction(cancelActionButton)
+
+        present(alertController, animated: true)
+    }
     func updateTextFields(){
         giftPersonNameLabel.text = "\(selectedPersonName)"
         giftPersonNameLabel.textColor = UIColor(hex: "#6E140D")
@@ -47,7 +97,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         totalBudgetLabel.text = "\(formattedBudget)"
     }
     @IBAction func addGiftToList(_ sender: Any) {
-        let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add new gift?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Santas Gift Workshop", message: "Do you want to add new Santa's gift?", preferredStyle: .alert)
         alertController.addTextField { textFieldValue in
             textFieldValue.placeholder = "Your gift here.."
         }

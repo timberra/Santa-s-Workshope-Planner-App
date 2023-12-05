@@ -196,7 +196,7 @@ extension UITableView {
 extension GiftTableViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if santasGifts.count == 0 {
-            tableView.setEmptyGiftView(title: "Your Santa's Workshop", message: "Please press Add to create a new to-do item", targetMonth: 12, targetDay: 25)
+            tableView.setEmptyGiftView(title: "Your Santa's Workshop", message: "Please press Add to create a new Santa's person", targetMonth: 12, targetDay: 25)
         } else {
             tableView.restoreGiftTableViewStyle()
         }
