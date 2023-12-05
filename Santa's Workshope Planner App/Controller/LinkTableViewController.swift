@@ -22,7 +22,7 @@ class LinkTableViewController: UITableViewController {
         loadCoreData()
     }
     @IBAction func addNewItemTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "Santas Link Workshop", message: "Do you want to add new link", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Santas Link Workshop", message: "Do you want to add a new link", preferredStyle: .alert)
         alertController.addTextField { textFieldValue in
             textFieldValue.placeholder = "Your title here..."
         }
@@ -33,10 +33,17 @@ class LinkTableViewController: UITableViewController {
             let textField = alertController.textFields?.first
             let subtitletextField = alertController.textFields?.last
 
+            guard let link = subtitletextField?.text,
+                  link.lowercased().hasPrefix("http://") || link.lowercased().hasPrefix("https://") else {
+                let invalidLinkAlert = UIAlertController(title: "Invalid Link", message: "Please enter a valid link starting with 'http://' or 'https://'", preferredStyle: .alert)
+                invalidLinkAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(invalidLinkAlert, animated: true, completion: nil)
+                return
+            }
             let entity = NSEntityDescription.entity(forEntityName: "SantaLink", in: self.managedObjectContext!)
             let list = NSManagedObject(entity: entity!, insertInto: self.managedObjectContext)
             list.setValue(textField?.text, forKey: "linkDetail")
-            list.setValue(subtitletextField?.text, forKey: "link")
+            list.setValue(link, forKey: "link")
             self.saveCoreData()
         }
         let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
