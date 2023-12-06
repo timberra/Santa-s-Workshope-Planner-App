@@ -17,18 +17,17 @@ class LinkTableViewController: UITableViewController {
     var editingIndexPath: IndexPath?
     var countdownTimer: Timer?
     var countdownDuration: TimeInterval = 0
-    var isLinkViewEmpty: Bool {
-            return santasLinks.isEmpty
-        }
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateBarButtonItems()
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-            tableView.addGestureRecognizer(longPressGesture)
+        tableView.addGestureRecognizer(longPressGesture)
         updateBarButtonItems()
         tableView.allowsSelection = true
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         managedObjectContext = appDelegate.persistentContainer.viewContext
         loadCoreData()
+        updateBarButtonItems()
     }
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
@@ -44,30 +43,24 @@ class LinkTableViewController: UITableViewController {
         alertController.addTextField { textFieldValue in
             textFieldValue.text = self.santasLinks[indexPath.row].linkDetail
         }
-
         alertController.addTextField { subtextFieldValue in
             subtextFieldValue.text = self.santasLinks[indexPath.row].link
         }
-
         let editActionButton = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
             guard let self = self,
                   let textField = alertController.textFields?.first,
                   let subtitleTextField = alertController.textFields?.last else {
                 return
             }
-
             let editedLink = self.santasLinks[indexPath.row]
             editedLink.linkDetail = textField.text
             editedLink.link = subtitleTextField.text
             self.saveCoreData()
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-
         let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
-
         alertController.addAction(editActionButton)
         alertController.addAction(cancelActionButton)
-
         present(alertController, animated: true)
     }
     @IBAction func addNewItemTapped(_ sender: Any) {
@@ -81,7 +74,6 @@ class LinkTableViewController: UITableViewController {
         let addActionButton = UIAlertAction(title: "Add", style: .default) { addActions in
             let textField = alertController.textFields?.first
             let subtitletextField = alertController.textFields?.last
-
             guard let link = subtitletextField?.text,
                   link.lowercased().hasPrefix("http://") || link.lowercased().hasPrefix("https://") else {
                 let invalidLinkAlert = UIAlertController(title: "Invalid Link", message: "Please enter a valid link starting with 'http://' or 'https://'", preferredStyle: .alert)
@@ -93,8 +85,8 @@ class LinkTableViewController: UITableViewController {
             let list = NSManagedObject(entity: entity!, insertInto: self.managedObjectContext)
             list.setValue(textField?.text, forKey: "linkDetail")
             list.setValue(link, forKey: "link")
-            self.updateBarButtonItems()
             self.saveCoreData()
+            self.updateBarButtonItems()
         }
         let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
         alertController.addAction(addActionButton)
@@ -102,7 +94,7 @@ class LinkTableViewController: UITableViewController {
         present(alertController, animated: true)
     }
     func updateBarButtonItems() {
-        if isLinkViewEmpty && !tableView.isEmptyLinkViewActive {
+        if santasLinks.isEmpty {
             countdownTillLink.isEnabled = false
         } else {
             countdownTillLink.isEnabled = true
@@ -143,11 +135,7 @@ extension LinkTableViewController {
 }
 //MARK: - Empty view logic
 extension UITableView {
-    var isEmptyLinkViewActive: Bool {
-         return self.backgroundView != nil
-     }
      func setEmptyLinkView(title: String, message: String, targetMonth: Int, targetDay: Int) {
-         guard !isEmptyLinkViewActive else { return }
          self.backgroundView = nil
          self.separatorStyle = .singleLine
          let currentYear = Calendar.current.component(.year, from: Date())
@@ -169,28 +157,32 @@ extension UITableView {
          let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
          let titleLabel = UILabel()
          let messageLabel = UILabel()
-         let infoLabel = UILabel() // Label for "Countdown till Christmas"
+         let infoLabel = UILabel()
          let countdownLabel = UILabel()
          let imageView = UIImageView()
+         let carImage = UIImageView()
          titleLabel.translatesAutoresizingMaskIntoConstraints = false
          messageLabel.translatesAutoresizingMaskIntoConstraints = false
          infoLabel.translatesAutoresizingMaskIntoConstraints = false
          countdownLabel.translatesAutoresizingMaskIntoConstraints = false
          imageView.translatesAutoresizingMaskIntoConstraints = false
+         carImage.translatesAutoresizingMaskIntoConstraints = false
          titleLabel.textColor = UIColor.black
          titleLabel.font = UIFont(name: "Quando-Regular", size: 27)
          messageLabel.textColor = UIColor.black
          messageLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 13)
-         infoLabel.textColor = UIColor(hex: "#6E140D") // Replace with your hex color
-         infoLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27) // Replace with your custom font
+         infoLabel.textColor = UIColor(hex: "#6E140D")
+         infoLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27) 
          countdownLabel.textColor = UIColor.black
          countdownLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27)
          imageView.image = UIImage(named: "Lights 2")
+         carImage.image = UIImage(named: "Car")
          emptyView.addSubview(titleLabel)
          emptyView.addSubview(messageLabel)
          emptyView.addSubview(infoLabel)
          emptyView.addSubview(countdownLabel)
          emptyView.addSubview(imageView)
+         emptyView.addSubview(carImage)
          titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -80).isActive = true
          titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
@@ -210,6 +202,10 @@ extension UITableView {
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          countdownLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 8).isActive = true
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         carImage.topAnchor.constraint(equalTo: countdownLabel.bottomAnchor, constant: 8).isActive = true
+         carImage.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         carImage.widthAnchor.constraint(equalToConstant: 500).isActive = true
+         carImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
          titleLabel.text = title
          messageLabel.text = message
          messageLabel.numberOfLines = 0
@@ -229,10 +225,7 @@ extension UITableView {
          }
          self.backgroundView = emptyView
      }
-
      func restoreLinkTableViewStyle() {
-         guard isEmptyLinkViewActive else { return }
-
          self.backgroundView = nil
          self.separatorStyle = .singleLine
      }

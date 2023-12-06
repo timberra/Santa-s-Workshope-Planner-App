@@ -14,17 +14,14 @@ class ToDoTableViewController: UITableViewController {
     var editingIndexPath: IndexPath?
     var countdownTimer: Timer?
     var countdownDuration: TimeInterval = 0
-    var isViewEmpty: Bool {
-            return santasToDo.isEmpty
-        }
     override func viewDidLoad() {
         super.viewDidLoad()
         updateBarButtonItems()
-
         tableView.allowsSelection = true
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         managedObjectContext = appDelegate.persistentContainer.viewContext
         loadCoreData()
+        updateBarButtonItems()
     }
     @IBAction func addNewItemTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Santas To Do Workshop ", message: "Do you want to add new task?", preferredStyle: .alert)
@@ -45,7 +42,7 @@ class ToDoTableViewController: UITableViewController {
         present(alertController, animated: true)
     }
     func updateBarButtonItems() {
-        if isViewEmpty && !tableView.isEmptyViewActive {
+        if santasToDo.isEmpty {
             countdownTillToDo.isEnabled = false
         } else {
             countdownTillToDo.isEnabled = true
@@ -75,12 +72,7 @@ extension ToDoTableViewController {
 }
 //MARK: - Empty view logic
 extension UITableView {
-    var isEmptyViewActive: Bool {
-         return self.backgroundView != nil
-     }
      func setEmptyToDoView(title: String, message: String, targetMonth: Int, targetDay: Int) {
-         guard !isEmptyViewActive else { return }
-
          self.backgroundView = nil
          self.separatorStyle = .singleLine
          let currentYear = Calendar.current.component(.year, from: Date())
@@ -105,11 +97,13 @@ extension UITableView {
          let infoLabel = UILabel()
          let countdownLabel = UILabel()
          let imageView = UIImageView()
+         let carImage = UIImageView()
          titleLabel.translatesAutoresizingMaskIntoConstraints = false
          messageLabel.translatesAutoresizingMaskIntoConstraints = false
          infoLabel.translatesAutoresizingMaskIntoConstraints = false
          countdownLabel.translatesAutoresizingMaskIntoConstraints = false
          imageView.translatesAutoresizingMaskIntoConstraints = false
+         carImage.translatesAutoresizingMaskIntoConstraints = false
          titleLabel.textColor = UIColor.black
          titleLabel.font = UIFont(name: "Quando-Regular", size: 27)
          messageLabel.textColor = UIColor.black
@@ -119,11 +113,13 @@ extension UITableView {
          countdownLabel.textColor = UIColor.black
          countdownLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27)
          imageView.image = UIImage(named: "Lights 2")
+         carImage.image = UIImage(named: "Car")
          emptyView.addSubview(titleLabel)
          emptyView.addSubview(messageLabel)
          emptyView.addSubview(infoLabel)
          emptyView.addSubview(countdownLabel)
          emptyView.addSubview(imageView)
+         emptyView.addSubview(carImage)
          titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -80).isActive = true
          titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
@@ -143,6 +139,10 @@ extension UITableView {
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          countdownLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 8).isActive = true
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         carImage.topAnchor.constraint(equalTo: countdownLabel.bottomAnchor, constant: 8).isActive = true
+         carImage.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         carImage.widthAnchor.constraint(equalToConstant: 500).isActive = true
+         carImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
          titleLabel.text = title
          messageLabel.text = message
          messageLabel.numberOfLines = 0
@@ -162,10 +162,7 @@ extension UITableView {
          }
          self.backgroundView = emptyView
      }
-
      func restoreToDoTableViewStyle() {
-         guard isEmptyViewActive else { return }
-
          self.backgroundView = nil
          self.separatorStyle = .singleLine
      }

@@ -14,9 +14,6 @@ class GiftTableViewController: UITableViewController {
     var santasGifts = [SantaGift]()
     var santasAddGifts = [SantaAddGift]()
     var cellAddOrder = 0
-    var isGiftViewEmpty: Bool {
-            return santasGifts.isEmpty
-        }
     override func viewDidLoad() {
         super.viewDidLoad()
         updateBarButtonItems()
@@ -30,6 +27,7 @@ class GiftTableViewController: UITableViewController {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         managedObjectContext = appDelegate.persistentContainer.viewContext
         loadCoreData()
+        updateBarButtonItems()
     }
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
@@ -86,10 +84,9 @@ class GiftTableViewController: UITableViewController {
                 list.setValue(Date().timeIntervalSince1970, forKey: "id")
                 list.setValue(textField.text, forKey: "person")
                 list.setValue(budgetValue, forKey: "budget")
-                list.setValue(self.cellAddOrder % 2 == 0 ? "#7a251f" : "#37523e", forKey: "cellColor")
                 self.cellAddOrder += 1
-                self.updateBarButtonItems()
                 self.saveCoreData()
+                self.updateBarButtonItems()
             }
             let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
             alertController.addAction(addActionButton)
@@ -103,7 +100,7 @@ class GiftTableViewController: UITableViewController {
             present(errorAlert, animated: true, completion: nil)
         }
     func updateBarButtonItems() {
-        if isGiftViewEmpty && !tableView.isEmptyGiftViewActive {
+        if santasGifts.isEmpty {
             countdownTillGift.isEnabled = false
         } else {
             countdownTillGift.isEnabled = true
@@ -112,11 +109,7 @@ class GiftTableViewController: UITableViewController {
 }
 //MARK: - Empty view logic
 extension UITableView {
-    var isEmptyGiftViewActive: Bool {
-         return self.backgroundView != nil
-     }
      func setEmptyGiftView(title: String, message: String, targetMonth: Int, targetDay: Int) {
-         guard !isEmptyGiftViewActive else { return }
          self.backgroundView = nil
          self.separatorStyle = .singleLine
          let currentYear = Calendar.current.component(.year, from: Date())
@@ -138,28 +131,32 @@ extension UITableView {
          let emptyView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
          let titleLabel = UILabel()
          let messageLabel = UILabel()
-         let infoLabel = UILabel() // Label for "Countdown till Christmas"
+         let infoLabel = UILabel()
          let countdownLabel = UILabel()
          let imageView = UIImageView()
+         let carImage = UIImageView()
          titleLabel.translatesAutoresizingMaskIntoConstraints = false
          messageLabel.translatesAutoresizingMaskIntoConstraints = false
          infoLabel.translatesAutoresizingMaskIntoConstraints = false
          countdownLabel.translatesAutoresizingMaskIntoConstraints = false
          imageView.translatesAutoresizingMaskIntoConstraints = false
+         carImage.translatesAutoresizingMaskIntoConstraints = false
          titleLabel.textColor = UIColor.black
          titleLabel.font = UIFont(name: "Quando-Regular", size: 27)
          messageLabel.textColor = UIColor.black
          messageLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 13)
-         infoLabel.textColor = UIColor(hex: "#6E140D") // Replace with your hex color
-         infoLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27) // Replace with your custom font
+         infoLabel.textColor = UIColor(hex: "#6E140D")
+         infoLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27) 
          countdownLabel.textColor = UIColor.black
          countdownLabel.font = UIFont(name: "PlayfairDisplay-Bold", size: 27)
          imageView.image = UIImage(named: "Lights 2")
+         carImage.image = UIImage(named: "Car")
          emptyView.addSubview(titleLabel)
          emptyView.addSubview(messageLabel)
          emptyView.addSubview(infoLabel)
          emptyView.addSubview(countdownLabel)
          emptyView.addSubview(imageView)
+         emptyView.addSubview(carImage)
          titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -80).isActive = true
          titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
@@ -179,6 +176,10 @@ extension UITableView {
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          countdownLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 8).isActive = true
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         carImage.topAnchor.constraint(equalTo: countdownLabel.bottomAnchor, constant: 8).isActive = true
+         carImage.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+         carImage.widthAnchor.constraint(equalToConstant: 500).isActive = true
+         carImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
          titleLabel.text = title
          messageLabel.text = message
          messageLabel.numberOfLines = 0
@@ -199,8 +200,6 @@ extension UITableView {
          self.backgroundView = emptyView
      }
      func restoreGiftTableViewStyle() {
-         guard isEmptyViewActive else { return }
-
          self.backgroundView = nil
          self.separatorStyle = .singleLine
      }
@@ -219,27 +218,22 @@ extension GiftTableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: "santaGiftCell", for: indexPath)
         let santasGift = santasGifts[indexPath.row]
         cell.textLabel?.text = santasGift.person
-        if let cellColor = santasGift.value(forKey: "cellColor") as? String {
-            cell.backgroundColor = UIColor(hex: cellColor)
-        } else {
-            cell.backgroundColor = .white
-        }
         return cell
-    }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Cell tapped at section \(indexPath.section), row \(indexPath.row)")
     }
 }
 // MARK: - CoreData logic
 extension GiftTableViewController{
     func loadCoreData(){
-        let request: NSFetchRequest<SantaGift> = SantaGift.fetchRequest()
+        let persRequest: NSFetchRequest<SantaGift> = SantaGift.fetchRequest()
+        let giftRequest: NSFetchRequest<SantaAddGift> = SantaAddGift.fetchRequest()
         do {
-            let result = try managedObjectContext?.fetch(request)
-            santasGifts = result ?? []
+            let persRequest = try managedObjectContext?.fetch(persRequest)
+            santasGifts = persRequest ?? []
+            let giftRequest = try managedObjectContext?.fetch(giftRequest)
+            santasAddGifts = giftRequest ?? []
             self.tableView.reloadData()
         } catch {
-            fatalError("Error in loading item into core data")
+            fatalError("Error in loading item from core data")
         }
     }
     func saveCoreData(){
@@ -251,38 +245,39 @@ extension GiftTableViewController{
         loadCoreData()
     }
 }
-    //MARK: - Delete table view row
-    extension GiftTableViewController{
-        override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-            return true
-        }
-        override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
-                let personToDelete = self.santasGifts[indexPath.row]
-                let associatedGifts = self.santasAddGifts.filter { $0.personID == personToDelete.id }
-                for gift in associatedGifts {
+//MARK: - Delete table view row
+extension GiftTableViewController{
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
+            let personToDelete = self.santasGifts[indexPath.row]
+            self.santasAddGifts.forEach { gift in
+                if (gift.personID == personToDelete.id) {
                     self.managedObjectContext?.delete(gift)
                 }
-                self.managedObjectContext?.delete(personToDelete)
-                self.saveCoreData()
-                if (self.santasGifts.isEmpty) {
-                    self.countdownTillGift.isEnabled = false
-                }
-                completionHandler(true)
             }
-            let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-            return configuration
+            self.managedObjectContext?.delete(personToDelete)
+            self.saveCoreData()
+            if (self.santasGifts.isEmpty) {
+                self.countdownTillGift.isEnabled = false
+            }
+            completionHandler(true)
+        }
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+}
+//MARK: - Send data
+extension GiftTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GiftDetailView" {
+            if let indexPath = tableView.indexPathForSelectedRow,
+               let secondViewController = segue.destination as? GiftDetailViewController{
+                let selectedSantaGift = santasGifts[indexPath.row]
+                secondViewController.selectedItem = selectedSantaGift
+            }
         }
     }
-    //MARK: - Send data
-    extension GiftTableViewController {
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "GiftDetailView" {
-                if let indexPath = tableView.indexPathForSelectedRow,
-                   let secondViewController = segue.destination as? GiftDetailViewController{
-                    let selectedSantaGift = santasGifts[indexPath.row]
-                    secondViewController.selectedItem = selectedSantaGift
-                }
-            }
-        }
-    }
+}

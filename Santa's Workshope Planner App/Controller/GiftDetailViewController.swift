@@ -36,7 +36,6 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             selectedPersonID = Int(selectedSantaGift.id)
             initialBudget = selectedSantaGift.budget
             budget = initialBudget
-            
             updateTextFields()
         } else {
             print("selectedItem is nil")
@@ -52,23 +51,19 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
     }
     func showEditAlert(forIndexPath indexPath: IndexPath) {
         let alertController = UIAlertController(title: "Edit Gift", message: "Edit the gift details", preferredStyle: .alert)
-
         alertController.addTextField { textFieldValue in
             textFieldValue.text = self.santasAddGifts[indexPath.row].gift
         }
-
         alertController.addTextField { subtextFieldValue in
             subtextFieldValue.text = String(self.santasAddGifts[indexPath.row].giftPrice)
             subtextFieldValue.keyboardType = .decimalPad
         }
-
         let editActionButton = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
             guard let self = self,
                   let textField = alertController.textFields?.first,
                   let subtitleTextField = alertController.textFields?.last else {
                 return
             }
-
             let editedGift = self.santasAddGifts[indexPath.row]
             editedGift.gift = textField.text
             if let budgetText = subtitleTextField.text,
@@ -76,21 +71,27 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
                 editedGift.giftPrice = budgetValue
                 self.saveCoreData()
                 self.giftListTable.reloadRows(at: [indexPath], with: .automatic)
-                self.budget = self.initialBudget
+                self.budget = recalculateBudget(budget: initialBudget)
                 self.updateTextFields()
             } else {
                 self.showErrorMessage(message: "Please enter a valid price for the gift.")
             }
         }
-
         let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
-
         alertController.addAction(editActionButton)
         alertController.addAction(cancelActionButton)
-
         present(alertController, animated: true)
     }
-    func updateTextFields(){
+    func recalculateBudget(budget: Double) -> Double {
+        var plannedExpense = 0.0
+        self.santasAddGifts.forEach { item in
+            if (item.personID == selectedPersonID) {
+                plannedExpense += item.giftPrice
+            }
+        }
+        return budget - plannedExpense
+    }
+    func updateTextFields() {
         giftPersonNameLabel.text = "\(selectedPersonName)"
         giftPersonNameLabel.textColor = UIColor(hex: "#6E140D")
         let formattedBudget = String(format: "%.2f", budget)
@@ -123,8 +124,6 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             list.setValue(selectedPersonID, forKey: "personID")
             list.setValue(budgetValue, forKey: "giftPrice")
             self.saveCoreData()
-            self.santasAddGifts.append(list as! SantaAddGift)
-            budget = initialBudget
             rowHeights.append(defaultRowHeight)
         }
         let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
@@ -143,7 +142,6 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             return santasAddGifts.count
         }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Cell for row at index path: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "giftPriceCell", for: indexPath) as! GiftDetailTableViewCell
         let santaGift = santasAddGifts[indexPath.row]
         cell.giftNameLabel?.text = santaGift.gift ?? ""
@@ -152,7 +150,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             rowHeights[indexPath.row] = 0
         }
         else {
-            budget -= santaGift.giftPrice
+            budget = recalculateBudget(budget: initialBudget)
             updateTextFields()
         }
         return cell
@@ -165,24 +163,22 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
     }
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
-            self.budget = self.initialBudget
-            self.updateTextFields()
             self.managedObjectContext?.delete(self.santasAddGifts[indexPath.row])
             self.saveCoreData()
+            self.rowHeights.remove(at: indexPath.row)
+            self.budget = self.recalculateBudget(budget: self.initialBudget)
+            self.updateTextFields()
             completionHandler(true)
         }
-        
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
     // MARK: - CoreData logic
-    
     func loadCoreData() {
         let request: NSFetchRequest<SantaAddGift> = SantaAddGift.fetchRequest()
         do {
             let result = try managedObjectContext?.fetch(request)
             santasAddGifts = result ?? []
-            print("Number of gifts loaded: \(santasAddGifts.count)")
             self.giftListTable.reloadData()
         } catch {
             fatalError("Error in loading item into core data")
