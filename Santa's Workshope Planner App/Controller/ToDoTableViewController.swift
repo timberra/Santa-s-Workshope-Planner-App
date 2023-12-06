@@ -9,6 +9,7 @@ import CoreData
 
 class ToDoTableViewController: UITableViewController {
     @IBOutlet weak var countdownTillToDo: UIBarButtonItem!
+    @IBOutlet weak var deleteAllToDo: UIBarButtonItem!
     var managedObjectContext: NSManagedObjectContext?
     var santasToDo = [SantaToDo]()
     var editingIndexPath: IndexPath?
@@ -48,7 +49,29 @@ class ToDoTableViewController: UITableViewController {
             countdownTillToDo.isEnabled = true
         }
     }
-}
+    @IBAction func deleteAllToDoList(_ sender: Any) {
+        let confirmDeleteAlert = UIAlertController(title: "Confirm Deletion", message: "Are you sure you want to delete all tasks?", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+                self.clearAllTasks()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            confirmDeleteAlert.addAction(deleteAction)
+            confirmDeleteAlert.addAction(cancelAction)
+            present(confirmDeleteAlert, animated: true)
+        }
+        func clearAllTasks() {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SantaToDo")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            do {
+                try managedObjectContext?.execute(deleteRequest)
+                try managedObjectContext?.save()
+                loadCoreData()
+                updateBarButtonItems()
+            } catch {
+                fatalError("Error in delete items from core data")
+            }
+        }
+    }
 // MARK: - CoreData logic
 extension ToDoTableViewController {
     func loadCoreData(){

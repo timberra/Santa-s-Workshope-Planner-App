@@ -58,7 +58,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
             subtextFieldValue.text = String(self.santasAddGifts[indexPath.row].giftPrice)
             subtextFieldValue.keyboardType = .decimalPad
         }
-        let editActionButton = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
+        let editActionButton = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
             guard let self = self,
                   let textField = alertController.textFields?.first,
                   let subtitleTextField = alertController.textFields?.last else {
@@ -137,7 +137,7 @@ class GiftDetailViewController: UIViewController, UITableViewDataSource, UITable
         errorAlert.addAction(okAction)
         present(errorAlert, animated: true, completion: nil)
     }
-// MARK: - TableView DataSource and Delegate methods
+// MARK: - TableView DataSource and Delegate methods, Delete row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return santasAddGifts.count
         }

@@ -217,19 +217,19 @@ extension UITableView {
              if let days = components.day, let hours = components.hour, let minutes = components.minute, let seconds = components.second {
                  let formattedTime = String(format: "%02dd %02dh %02dm %02ds", days, hours, minutes, seconds)
                  countdownLabel.text = formattedTime
-             }
+            }
              if currentDate >= targetDate {
                  timer.invalidate()
                  countdownLabel.text = "Merry Christmas!"
-             }
-         }
+            }
+        }
          self.backgroundView = emptyView
-     }
+    }
      func restoreLinkTableViewStyle() {
          self.backgroundView = nil
          self.separatorStyle = .singleLine
-     }
- }
+    }
+}
 // MARK: - Table view data add to the cell and safari
 extension LinkTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

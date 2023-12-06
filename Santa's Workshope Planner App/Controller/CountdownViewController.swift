@@ -18,7 +18,7 @@ class CountdownViewController: UIViewController {
             components.minute = 0
             components.second = 0
             return Calendar.current.date(from: components)!
-        }()
+    }()
     var timer: Timer?
     override func viewDidLoad() {
         super.viewDidLoad()

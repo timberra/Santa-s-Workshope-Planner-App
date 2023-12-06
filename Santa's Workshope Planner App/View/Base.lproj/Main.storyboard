@@ -464,6 +464,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Santa's to do" id="EXb-j8-Wd8">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="minus.diamond" catalog="system" id="Jb0-xh-nCG">
+                            <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="deleteAllToDoList:" destination="Cj6-hg-bnm" id="y5F-iZ-ueb"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="plus.app" catalog="system" id="3PS-wk-tv6">
                                 <color key="tintColor" red="0.43137254901960786" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -483,6 +489,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="countdownTillToDo" destination="w3E-cZ-MuU" id="apu-Zl-j7b"/>
+                        <outlet property="deleteAllToDo" destination="Jb0-xh-nCG" id="esn-EA-eUJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LxV-l1-HIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -491,7 +498,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vHD-V3-5yu"/>
+        <segue reference="qTX-LT-M6z"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.43137254899999999" green="0.079399444159999999" blue="0.050948731599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
@@ -502,6 +509,7 @@
         <image name="gift.fill" catalog="system" width="128" height="125"/>
         <image name="giftcard" catalog="system" width="128" height="88"/>
         <image name="list.bullet.clipboard" catalog="system" width="98" height="128"/>
+        <image name="minus.diamond" catalog="system" width="128" height="124"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
         <image name="timelapse" catalog="system" width="128" height="124"/>
     </resources>
