@@ -329,8 +329,8 @@
                                     <outlet property="delegate" destination="mgs-iT-P23" id="44P-82-c2M"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6O-1i-qEH">
-                                <rect key="frame" x="119" y="64" width="136" height="53"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6O-1i-qEH">
+                                <rect key="frame" x="119" y="64" width="137" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="hGr-nQ-esI"/>
                                 </constraints>
@@ -373,9 +373,12 @@
                         <color key="backgroundColor" red="0.54117647059999996" green="0.62745098040000002" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="J2k-ol-GdP" firstAttribute="bottom" secondItem="Y7A-b8-KJZ" secondAttribute="bottom" constant="25" id="BPt-Hs-G2J"/>
+                            <constraint firstItem="jVK-Ad-DHa" firstAttribute="trailing" secondItem="J2k-ol-GdP" secondAttribute="trailing" id="GUZ-gr-mlf"/>
                             <constraint firstItem="bTg-CO-EXX" firstAttribute="centerX" secondItem="Y7A-b8-KJZ" secondAttribute="centerX" id="IEh-lL-X9w"/>
                             <constraint firstItem="z6O-1i-qEH" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" constant="119" id="IaZ-1O-ith"/>
                             <constraint firstItem="NdJ-z0-Mat" firstAttribute="top" secondItem="z6O-1i-qEH" secondAttribute="bottom" constant="33" id="LSe-YU-M5l"/>
+                            <constraint firstItem="jVK-Ad-DHa" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" id="LkW-70-1Ht"/>
+                            <constraint firstItem="bTg-CO-EXX" firstAttribute="top" secondItem="NdJ-z0-Mat" secondAttribute="bottom" constant="5" id="NDL-Zc-VS6"/>
                             <constraint firstItem="NdJ-z0-Mat" firstAttribute="top" secondItem="jVK-Ad-DHa" secondAttribute="bottom" id="NmL-Ky-Yec"/>
                             <constraint firstItem="jVK-Ad-DHa" firstAttribute="leading" secondItem="bTg-CO-EXX" secondAttribute="leading" id="PXH-TT-wX5"/>
                             <constraint firstItem="J2k-ol-GdP" firstAttribute="trailing" secondItem="6m5-EQ-XSE" secondAttribute="trailing" constant="63" id="Q3X-po-gYN"/>
@@ -393,6 +396,7 @@
                             <constraint firstItem="jVK-Ad-DHa" firstAttribute="trailing" secondItem="bTg-CO-EXX" secondAttribute="trailing" id="p3h-S6-P0Q"/>
                             <constraint firstItem="bTg-CO-EXX" firstAttribute="leading" secondItem="J2k-ol-GdP" secondAttribute="leading" id="rrL-B5-9fa"/>
                             <constraint firstItem="Y7A-b8-KJZ" firstAttribute="top" secondItem="bTg-CO-EXX" secondAttribute="bottom" constant="40" id="t8X-WA-Dyn"/>
+                            <constraint firstItem="NdJ-z0-Mat" firstAttribute="top" secondItem="jVK-Ad-DHa" secondAttribute="bottom" id="yg4-2A-Q8M"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="s5o-5s-8XA"/>

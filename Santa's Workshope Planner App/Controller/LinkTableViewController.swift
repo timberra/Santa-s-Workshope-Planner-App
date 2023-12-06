@@ -191,7 +191,7 @@ extension UITableView {
          imageView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 8).isActive = true
          imageView.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          imageView.widthAnchor.constraint(equalToConstant: 376).isActive = true
-         imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+         imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
          infoLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8).isActive = true
          infoLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          let infoLabelAttributedString = NSMutableAttributedString(string: "Countdown till Christmas")
@@ -204,8 +204,8 @@ extension UITableView {
          countdownLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
          carImage.topAnchor.constraint(equalTo: countdownLabel.bottomAnchor, constant: 8).isActive = true
          carImage.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
-         carImage.widthAnchor.constraint(equalToConstant: 500).isActive = true
-         carImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
+         carImage.widthAnchor.constraint(equalToConstant: 376).isActive = true
+         carImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
          titleLabel.text = title
          messageLabel.text = message
          messageLabel.numberOfLines = 0
